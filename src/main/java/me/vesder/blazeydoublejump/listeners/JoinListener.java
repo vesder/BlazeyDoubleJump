@@ -19,7 +19,7 @@ public class JoinListener implements Listener {
     private void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        if (!getBooleanConfig("Settings.InfiniteJump") && !doubleJumpStatus.containsKey(player.getUniqueId())) {
+        if (!getBooleanConfig("Settings.InfiniteJump")) {
             doubleJumpStatus.put(player.getUniqueId(), true);
         }
 
