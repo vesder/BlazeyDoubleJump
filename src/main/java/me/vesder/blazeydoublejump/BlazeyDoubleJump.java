@@ -34,7 +34,7 @@ public final class BlazeyDoubleJump extends JavaPlugin {
         getConsoleSender().sendMessage(color("&d=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ★"));
         getConsoleSender().sendMessage(color("&d      BlazeyDoubleJump  "));
         getConsoleSender().sendMessage(""); // Blank line for readability
-        getConsoleSender().sendMessage(color("&d      V:1.0    "));
+        getConsoleSender().sendMessage(color("&d      V:1.1    "));
         getConsoleSender().sendMessage(color("&d      Made By @Vesder      "));
         getConsoleSender().sendMessage(color("&dContact Me In Discord For Support"));
         getConsoleSender().sendMessage(color("&d=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ★"));
