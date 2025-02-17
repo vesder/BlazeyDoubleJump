@@ -1,10 +1,22 @@
+# Don't Change ConfigVersion !!!
+ConfigVersion: 1.0
+
 Settings:
+  # Should the player be able to jump infinitely?
   InfiniteJump: false
+  # Launch power for double jump (max 10)
   Launch_power: 1.0
   Launch_power_y: 0.5
+  # The sound that plays after jump, set "" to disable
+  # List Of Sounds https://helpch.at/docs/1.12/index.html?org/bukkit/Sound.html
   Sound: "ENTITY_BAT_TAKEOFF"
+  # The sound that plays when player can't jump again, set "" to disable
   SoundError: "ENTITY_VILLAGER_NO"
+
 Messages:
+  # Message sent after the jump, set "" to disable
   DoubleJump: "&dYou jumped twice :)"
+  # Message sent when player can't jump again, set "" to disable
   AlreadyDoubleJumped: "&cYou Already DoubleJumped Before"
+  # message sent when the player lands after jump, set "" to disable
   DoubleJumpIsActive: "&aNow You Can DoubleJump Again"
