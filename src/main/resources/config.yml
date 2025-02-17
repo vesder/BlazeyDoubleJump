@@ -1,0 +1,10 @@
+Settings:
+  InfiniteJump: false
+  Launch_power: 1.0
+  Launch_power_y: 0.5
+  Sound: "ENTITY_BAT_TAKEOFF"
+  SoundError: "ENTITY_VILLAGER_NO"
+Messages:
+  DoubleJump: "You jumped twice :)"
+  AlreadyDoubleJumped: "You Already DoubleJumped Before"
+  DoubleJumpIsActive: "Now You Can DoubleJump Again"
