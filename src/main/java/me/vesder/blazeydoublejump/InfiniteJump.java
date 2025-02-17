@@ -7,15 +7,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 
-import static me.vesder.blazeydoublejump.utils.TextUtils.getDoubleConfig;
-import static me.vesder.blazeydoublejump.utils.TextUtils.getStringConfig;
+import static me.vesder.blazeydoublejump.utils.TextUtils.*;
 
 public class InfiniteJump implements Listener {
 
     private final double launch = getDoubleConfig("Settings.Launch_power"),
             launchY = getDoubleConfig("Settings.Launch_power_y");
 
-    private final String doubleJumpMsg = getStringConfig("Messages.DoubleJump");
+    private final String doubleJumpMsg = color(getStringConfig("Messages.DoubleJump"));
 
     private final Sound jumpSound = Sound.valueOf(getStringConfig("Settings.Sound"));
 

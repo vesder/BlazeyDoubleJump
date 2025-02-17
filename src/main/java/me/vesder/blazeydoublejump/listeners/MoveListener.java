@@ -6,11 +6,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import static me.vesder.blazeydoublejump.listeners.JoinListener.doubleJumpStatus;
+import static me.vesder.blazeydoublejump.utils.TextUtils.color;
 import static me.vesder.blazeydoublejump.utils.TextUtils.getStringConfig;
 
 public class MoveListener implements Listener {
 
-    private final String doubleJumpActive = getStringConfig("Messages.DoubleJumpIsActive");
+    private final String doubleJumpActive = color(getStringConfig("Messages.DoubleJumpIsActive"));
 
     @EventHandler
     private void onMove(PlayerMoveEvent e) {

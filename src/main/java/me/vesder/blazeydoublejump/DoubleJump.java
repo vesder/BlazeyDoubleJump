@@ -8,16 +8,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 
 import static me.vesder.blazeydoublejump.listeners.JoinListener.doubleJumpStatus;
-import static me.vesder.blazeydoublejump.utils.TextUtils.getDoubleConfig;
-import static me.vesder.blazeydoublejump.utils.TextUtils.getStringConfig;
+import static me.vesder.blazeydoublejump.utils.TextUtils.*;
 
 public class DoubleJump implements Listener {
 
     private final double launch = getDoubleConfig("Settings.Launch_power"),
             launchY = getDoubleConfig("Settings.Launch_power_y");
 
-    private final String doubleJumpMsg = getStringConfig("Messages.DoubleJump"),
-            alreadyJumpedMsg = getStringConfig("Messages.AlreadyDoubleJumped");
+    private final String doubleJumpMsg = color(getStringConfig("Messages.DoubleJump")),
+            alreadyJumpedMsg = color(getStringConfig("Messages.AlreadyDoubleJumped"));
 
     private final Sound jumpSound = Sound.valueOf(getStringConfig("Settings.Sound")),
             errorSound = Sound.valueOf(getStringConfig("Settings.SoundError"));
