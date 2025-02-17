@@ -14,9 +14,8 @@ public class InfiniteJump implements Listener {
     private final double launch = getDoubleConfig("Settings.Launch_power"),
             launchY = getDoubleConfig("Settings.Launch_power_y");
 
-    private final String doubleJumpMsg = color(getStringConfig("Messages.DoubleJump"));
-
-    private final Sound jumpSound = Sound.valueOf(getStringConfig("Settings.Sound"));
+    private final String doubleJumpMsg = color(getStringConfig("Messages.DoubleJump")),
+            jumpSound = getStringConfig("Settings.Sound");
 
     @EventHandler
     private void onToggleFlight(PlayerToggleFlightEvent e) {
@@ -30,7 +29,11 @@ public class InfiniteJump implements Listener {
         if (!doubleJumpMsg.isEmpty()) {
             player.sendMessage(doubleJumpMsg);
         }
-        player.playSound(player.getLocation(), jumpSound, 5.0F, 1.0F);
+
+        if (!jumpSound.isEmpty()) {
+            player.playSound(player.getLocation(), Sound.valueOf(jumpSound), 5.0F, 1.0F);
+        }
+
         player.setVelocity(player.getLocation().getDirection().multiply(launch).setY(launchY));
         e.setCancelled(true);
 

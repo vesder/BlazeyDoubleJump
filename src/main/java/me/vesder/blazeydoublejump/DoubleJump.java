@@ -16,10 +16,9 @@ public class DoubleJump implements Listener {
             launchY = getDoubleConfig("Settings.Launch_power_y");
 
     private final String doubleJumpMsg = color(getStringConfig("Messages.DoubleJump")),
-            alreadyJumpedMsg = color(getStringConfig("Messages.AlreadyDoubleJumped"));
-
-    private final Sound jumpSound = Sound.valueOf(getStringConfig("Settings.Sound")),
-            errorSound = Sound.valueOf(getStringConfig("Settings.SoundError"));
+            alreadyJumpedMsg = color(getStringConfig("Messages.AlreadyDoubleJumped")),
+            jumpSound = getStringConfig("Settings.Sound"),
+            errorSound = getStringConfig("Settings.SoundError");
 
     @EventHandler
     private void onToggleFlight(PlayerToggleFlightEvent e) {
@@ -33,7 +32,9 @@ public class DoubleJump implements Listener {
             if (!alreadyJumpedMsg.isEmpty()) {
                 player.sendMessage(alreadyJumpedMsg);
             }
-            player.playSound(player.getLocation(), errorSound, 5.0F, 1.0F);
+            if (!errorSound.isEmpty()) {
+                player.playSound(player.getLocation(), Sound.valueOf(errorSound), 5.0F, 1.0F);
+            }
             e.setCancelled(true);
             return;
         }
@@ -41,7 +42,10 @@ public class DoubleJump implements Listener {
         if (!doubleJumpMsg.isEmpty()) {
             player.sendMessage(doubleJumpMsg);
         }
-        player.playSound(player.getLocation(), jumpSound, 5.0F, 1.0F);
+
+        if (!jumpSound.isEmpty()) {
+            player.playSound(player.getLocation(), Sound.valueOf(jumpSound), 5.0F, 1.0F);
+        }
         player.setVelocity(player.getLocation().getDirection().multiply(launch).setY(launchY));
         doubleJumpStatus.put(player.getUniqueId(), false);
         e.setCancelled(true);
