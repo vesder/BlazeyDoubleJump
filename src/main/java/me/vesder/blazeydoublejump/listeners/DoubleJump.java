@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 
-import static me.vesder.blazeydoublejump.listeners.JoinListener.doubleJumpStatus;
 import static me.vesder.blazeydoublejump.utils.TextUtils.*;
 
 public class DoubleJump implements Listener {
@@ -20,9 +19,11 @@ public class DoubleJump implements Listener {
 
         Player player = e.getPlayer();
 
-        if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR || !e.isFlying()) {
-            return;
-        } else if (!doubleJumpStatus.get(player.getUniqueId())) {
+        if (player.getGameMode() == GameMode.CREATIVE ||
+            player.getGameMode() == GameMode.SPECTATOR ||
+            !e.isFlying()) return;
+
+        if (!player.getAllowFlight()) {
 
             VoidUtils.sendMsg(player, getStringConfig("Messages.AlreadyDoubleJumped"));
             VoidUtils.playStringSound(player, getStringConfig("Settings.SoundError"));
@@ -34,7 +35,7 @@ public class DoubleJump implements Listener {
         VoidUtils.playStringSound(player, getStringConfig("Settings.Sound"));
 
         player.setVelocity(player.getLocation().getDirection().multiply(LAUNCH).setY(LAUNCHY));
-        doubleJumpStatus.put(player.getUniqueId(), false);
+        player.setAllowFlight(true);
         e.setCancelled(true);
 
     }
