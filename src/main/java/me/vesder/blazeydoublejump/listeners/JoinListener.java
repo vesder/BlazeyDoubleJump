@@ -6,11 +6,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import java.util.HashMap;
-import java.util.UUID;
-
-import static me.vesder.blazeydoublejump.utils.TextUtils.getBooleanConfig;
-
 public class JoinListener implements Listener {
 
     @EventHandler
@@ -18,11 +13,9 @@ public class JoinListener implements Listener {
 
         Player player = event.getPlayer();
 
-        if (player.getGameMode() != GameMode.CREATIVE && player.getGameMode() != GameMode.SPECTATOR) {
-            if (!player.getAllowFlight()) {
-                player.setAllowFlight(true);
-            }
-        }
+        if (player.getGameMode() == GameMode.CREATIVE && player.getGameMode() == GameMode.SPECTATOR) return;
+
+        if (!player.getAllowFlight()) player.setAllowFlight(true);
 
     }
 
