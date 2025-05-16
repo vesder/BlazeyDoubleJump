@@ -14,6 +14,8 @@ Settings:
   SoundError: "ENTITY_VILLAGER_NO"
 
 Messages:
+  # The prefix that will appear at the beginning of all messages
+  Prefix: "BDJ >"
   # Message sent after the jump, set "" to disable
   DoubleJump: "&dYou jumped twice :)"
   # Message sent when player can't jump again, set "" to disable
