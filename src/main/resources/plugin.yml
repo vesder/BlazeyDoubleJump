@@ -1,5 +1,6 @@
 name: BlazeyDoubleJump
 version: '${version}'
 main: me.vesder.blazeydoublejump.BlazeyDoubleJump
-authors: [ vesder124 ]
+api-version: "1.13"
+authors: [ vesder ]
 description: A simple double jump plugin for bukkit servers
