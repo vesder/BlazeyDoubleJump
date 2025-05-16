@@ -13,21 +13,17 @@ import static me.vesder.blazeydoublejump.utils.TextUtils.getBooleanConfig;
 
 public class JoinListener implements Listener {
 
-    public static HashMap<UUID, Boolean> doubleJumpStatus = new HashMap<>();
-
     @EventHandler
     private void onJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
 
-        if (!getBooleanConfig("Settings.InfiniteJump")) {
-            doubleJumpStatus.put(player.getUniqueId(), true);
-        }
+        Player player = event.getPlayer();
 
         if (player.getGameMode() != GameMode.CREATIVE && player.getGameMode() != GameMode.SPECTATOR) {
             if (!player.getAllowFlight()) {
-                player.getPlayer().setAllowFlight(true);
+                player.setAllowFlight(true);
             }
         }
+
     }
 
 }
