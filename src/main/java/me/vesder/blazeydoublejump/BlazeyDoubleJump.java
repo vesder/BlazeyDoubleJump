@@ -1,5 +1,7 @@
 package me.vesder.blazeydoublejump;
 
+import me.vesder.blazeydoublejump.listeners.DoubleJump;
+import me.vesder.blazeydoublejump.listeners.InfiniteJump;
 import me.vesder.blazeydoublejump.listeners.JoinListener;
 import me.vesder.blazeydoublejump.listeners.MoveListener;
 import org.bukkit.plugin.java.JavaPlugin;
