@@ -5,20 +5,27 @@ Settings:
   # Should the player be able to jump infinitely?
   InfiniteJump: false
   # Launch power for double jump (max 10)
-  Launch_power: 1.0
-  Launch_power_y: 0.5
-  # The sound that plays after jump, set "" to disable
-  # List Of Sounds https://helpch.at/docs/1.12/index.html?org/bukkit/Sound.html
-  Sound: "ENTITY_BAT_TAKEOFF"
-  # The sound that plays when player can't jump again, set "" to disable
-  SoundError: "ENTITY_VILLAGER_NO"
+  Launch: 1.0
+  LaunchY: 0.5
 
-Messages:
-  # The prefix that will appear at the beginning of all messages
-  Prefix: "BDJ >"
-  # Message sent after the jump, set "" to disable
-  DoubleJump: "&dYou jumped twice :)"
-  # Message sent when player can't jump again, set "" to disable
-  AlreadyDoubleJumped: "&cYou Already DoubleJumped Before"
-  # message sent when the player lands after jump, set "" to disable
-  DoubleJumpIsActive: "&aNow You Can DoubleJump Again"
+Actions:
+  # The prefix that will appear at the beginning of all messages, set "" to disable
+  prefix: "&dBDJ &6> "
+  # Actions That Will Run When Player Jumps
+  OnJump:
+    # Message sent after the jump, set "" to disable
+    message: "&bYou jumped twice :)"
+    # The sound that plays after jump, set "" to disable
+    # List Of Sounds https://helpch.at/docs/1.12/index.html?org/bukkit/Sound.html
+    sound: "ENTITY_BAT_TAKEOFF"
+    # Run Command For Player When Jump, set "" to disable
+    command: ""
+  OnActive:
+    # message sent when the player lands after jump, set "" to disable
+    message: "&bNow You Can DoubleJump Again"
+  Errors:
+    AlreadyJumped:
+      # Message sent when player can't jump again, set "" to disable
+      message: "&bYou Already DoubleJumped Before"
+      # The sound that plays when player can't jump again, set "" to disable
+      sound: "ENTITY_VILLAGER_NO"
