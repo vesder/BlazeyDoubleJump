@@ -10,7 +10,7 @@ Settings:
   LaunchY: 0.5
 
 Actions:
-  # Prefix displayed at the beginning of all messages (set "" to disable)
+  # Prefix sent at the beginning of all messages (set "" to disable)
   prefix: "&dBDJ &6> "
   # Actions executed when the player jumps
   OnJump:
