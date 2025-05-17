@@ -11,8 +11,8 @@ import static me.vesder.blazeydoublejump.utils.TextUtils.*;
 
 public class InfiniteJump implements Listener {
 
-    private final double LAUNCH = getDoubleConfig("Settings.Launch_power"),
-            LAUNCHY = getDoubleConfig("Settings.Launch_power_y");
+    private final double LAUNCH = getDoubleConfig("Settings.Launch"),
+            LAUNCHY = getDoubleConfig("Settings.LaunchY");
 
     @EventHandler
     private void onToggleFlight(PlayerToggleFlightEvent e) {
