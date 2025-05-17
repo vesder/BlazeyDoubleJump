@@ -22,7 +22,7 @@ Actions:
     # Command executed when the player jumps (set "" to disable)
     command: ""
   OnActive:
-    # Message sent when the player lands after the jump (set "" to disable)
+    # Message sent when the player can jump again (set "" to disable)
     message: "&bNow You Can DoubleJump Again"
   Errors:
     AlreadyJumped:
