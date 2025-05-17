@@ -35,7 +35,7 @@ public class DoubleJump implements Listener {
         VoidUtils.playStringSound(player, getStringConfig("Settings.Sound"));
 
         player.setVelocity(player.getLocation().getDirection().multiply(LAUNCH).setY(LAUNCHY));
-        player.setAllowFlight(true);
+        player.setAllowFlight(false);
         e.setCancelled(true);
 
     }
