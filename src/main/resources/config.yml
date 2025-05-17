@@ -6,33 +6,37 @@ Settings:
   InfiniteJump: false
   # Horizontal launch power (max 10)
   Launch: 1.0
-  # Vertical launch power (Y axis)
+  # Vertical launch power (Y-axis)
   LaunchY: 0.5
 
 Actions:
-  # The prefix that will appear at the beginning of all messages (set "" to disable)
+  # Prefix displayed at the beginning of all messages (set "" to disable)
   prefix: "&dBDJ &6> "
-  # Actions that will run when player jumps
+  # Actions executed when the player jumps
   OnJump:
     # Message sent after the jump (set "" to disable)
     message: "&bYou jumped twice :)"
-    # The sound that plays after the jump (set "" to disable)
-    # List Of Sounds https://helpch.at/docs/1.12/index.html?org/bukkit/Sound.html
+    # Sound played when the player jumps (set "" to disable)
+    # List of available sounds: https://helpch.at/docs/1.12/index.html?org/bukkit/Sound.html
     sound: "ENTITY_BAT_TAKEOFF"
-    # The command that runs after jump (set "" to disable)
+    # Command executed when the player jumps (set "" to disable)
     command: ""
   OnActive:
-    # Message sent when the player lands after jump (set "" to disable)
+    # Message sent when the player lands after the jump (set "" to disable)
     message: "&bNow You Can DoubleJump Again"
   Errors:
     AlreadyJumped:
       # Message sent when the player can't jump again (set "" to disable)
       message: "&bYou Already DoubleJumped Before"
-      # The sound that plays when the player can't jump again (set "" to disable)
+      # Sound played when the player can't jump again (set "" to disable)
       sound: "ENTITY_VILLAGER_NO"
     Cooldown:
+      # Message sent when jump is on cooldown (set "" to disable)
       message: ""
+      # Sound played when jump is on cooldown (set "" to disable)
       sound: ""
     NotAvailable:
+      # Message sent when the jump feature is not available (set "" to disable)
       message: ""
+      # Sound played when the jump feature is not available (set "" to disable)
       sound: ""
