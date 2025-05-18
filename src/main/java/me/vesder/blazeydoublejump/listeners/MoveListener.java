@@ -19,7 +19,8 @@ public class MoveListener implements Listener {
         if (player.getAllowFlight() || !player.isOnGround()) return;
 
         setJumpStatus(player.getUniqueId(), true);
-        VoidUtils.sendMsg(player, getStringConfig("Messages.DoubleJumpIsActive"));
+        VoidUtils.sendMsg(player, getStringConfig("Actions.OnActive.message"));
+        VoidUtils.playStringSound(player,getStringConfig("Actions.OnActive.sound"));
 
     }
 
