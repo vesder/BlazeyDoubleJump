@@ -17,6 +17,7 @@ public class MoveListener implements Listener {
 
         Player player = e.getPlayer();
 
+        if (!player.getAllowFlight()) player.setAllowFlight(true);
         if (getJumpStatus(player.getUniqueId()) || !player.isOnGround()) return;
 
         setJumpStatus(player.getUniqueId(), true);
