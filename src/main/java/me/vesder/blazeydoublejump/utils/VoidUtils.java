@@ -8,7 +8,7 @@ import static me.vesder.blazeydoublejump.utils.TextUtils.getStringConfig;
 
 public class VoidUtils {
 
-    private static final String prefix = getStringConfig("Messages.Prefix");
+    private static final String prefix = getStringConfig("Actions.prefix");
 
     public static void sendMsg(Player player, String message) {
 
