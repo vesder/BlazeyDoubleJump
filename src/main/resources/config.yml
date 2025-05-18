@@ -26,6 +26,8 @@ Actions:
   OnActive:
     # Message sent when the player can jump again (set "" to disable)
     message: "&bNow You Can DoubleJump Again"
+    # Sound played when the player can jump again (set "" to disable)
+    sound: ""
   Errors:
     AlreadyJumped:
       # Message sent when the player can't jump again (set "" to disable)
