@@ -7,12 +7,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 
+import static me.vesder.blazeydoublejump.utils.JumpUtility.*;
 import static me.vesder.blazeydoublejump.utils.TextUtils.*;
 
 public class DoubleJump implements Listener {
-
-    private final double LAUNCH = getDoubleConfig("Settings.Launch"),
-            LAUNCHY = getDoubleConfig("Settings.LaunchY");
 
     @EventHandler
     private void onToggleFlight(PlayerToggleFlightEvent e) {
@@ -23,7 +21,7 @@ public class DoubleJump implements Listener {
             player.getGameMode() == GameMode.SPECTATOR ||
             !e.isFlying()) return;
 
-        if (!player.getAllowFlight()) {
+        if (!getJumpStatus(player.getUniqueId())) {
 
             VoidUtils.sendMsg(player, getStringConfig("Messages.AlreadyDoubleJumped"));
             VoidUtils.playStringSound(player, getStringConfig("Settings.SoundError"));
@@ -35,7 +33,7 @@ public class DoubleJump implements Listener {
         VoidUtils.playStringSound(player, getStringConfig("Settings.Sound"));
 
         player.setVelocity(player.getLocation().getDirection().multiply(LAUNCH).setY(LAUNCHY));
-        player.setAllowFlight(false);
+        setJumpStatus(player.getUniqueId(), false);
         e.setCancelled(true);
 
     }

@@ -7,12 +7,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 
+import static me.vesder.blazeydoublejump.utils.JumpUtility.LAUNCH;
+import static me.vesder.blazeydoublejump.utils.JumpUtility.LAUNCHY;
 import static me.vesder.blazeydoublejump.utils.TextUtils.*;
 
 public class InfiniteJump implements Listener {
-
-    private final double LAUNCH = getDoubleConfig("Settings.Launch"),
-            LAUNCHY = getDoubleConfig("Settings.LaunchY");
 
     @EventHandler
     private void onToggleFlight(PlayerToggleFlightEvent e) {

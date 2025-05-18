@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+import static me.vesder.blazeydoublejump.utils.JumpUtility.setJumpStatus;
 import static me.vesder.blazeydoublejump.utils.TextUtils.getStringConfig;
 
 public class MoveListener implements Listener {
@@ -17,7 +18,7 @@ public class MoveListener implements Listener {
 
         if (player.getAllowFlight() || !player.isOnGround()) return;
 
-        player.setAllowFlight(true);
+        setJumpStatus(player.getUniqueId(), true);
         VoidUtils.sendMsg(player, getStringConfig("Messages.DoubleJumpIsActive"));
 
     }
