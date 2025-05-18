@@ -23,7 +23,6 @@ public class InfiniteJump implements Listener {
             !e.isFlying()) return;
 
         VoidUtils.sendMsg(player, getStringConfig("Actions.OnJump.message"));
-
         VoidUtils.playStringSound(player, getStringConfig("Actions.OnJump.sound"));
 
         player.setVelocity(player.getLocation().getDirection().multiply(LAUNCH).setY(LAUNCHY));
