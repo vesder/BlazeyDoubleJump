@@ -8,6 +8,8 @@ Settings:
   Launch: 1.0
   # Vertical launch power (Y-axis)
   LaunchY: 0.5
+  # Cooldown between double jumps (in seconds)
+  Cooldown: "1.5"
 
 Actions:
   # Prefix sent at the beginning of all messages (set "" to disable)
