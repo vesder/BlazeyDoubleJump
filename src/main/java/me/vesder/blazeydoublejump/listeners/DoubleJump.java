@@ -23,14 +23,14 @@ public class DoubleJump implements Listener {
 
         if (!getJumpStatus(player.getUniqueId())) {
 
-            VoidUtils.sendMsg(player, getStringConfig("Messages.AlreadyDoubleJumped"));
-            VoidUtils.playStringSound(player, getStringConfig("Settings.SoundError"));
+            VoidUtils.sendMsg(player, getStringConfig("Actions.Errors.AlreadyJumped.message"));
+            VoidUtils.playStringSound(player, getStringConfig("Actions.Errors.AlreadyJumped.sound"));
             e.setCancelled(true);
             return;
         }
 
-        VoidUtils.sendMsg(player, getStringConfig("Messages.DoubleJump"));
-        VoidUtils.playStringSound(player, getStringConfig("Settings.Sound"));
+        VoidUtils.sendMsg(player, getStringConfig("Actions.OnJump.message"));
+        VoidUtils.playStringSound(player, getStringConfig("Actions.OnJump.sound"));
 
         player.setVelocity(player.getLocation().getDirection().multiply(LAUNCH).setY(LAUNCHY));
         setJumpStatus(player.getUniqueId(), false);
