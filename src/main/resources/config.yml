@@ -13,11 +13,11 @@ Settings:
 
 Actions:
   # Prefix sent at the beginning of all messages (set "" to disable)
-  prefix: "&dBDJ &6> "
+  prefix: "&d&lDoubleJump &6» &b"
   # Actions executed when the player jumps
   OnJump:
     # Message sent after the jump (set "" to disable)
-    message: "&bYou jumped twice :)"
+    message: "Woosh! You launched into the air!"
     # Sound played when the player jumps (set "" to disable)
     # List of available sounds: https://helpch.at/docs/1.12/index.html?org/bukkit/Sound.html
     sound: "ENTITY_BAT_TAKEOFF"
@@ -25,22 +25,22 @@ Actions:
     command: ""
   OnActive:
     # Message sent when the player can jump again (set "" to disable)
-    message: "&bNow You Can DoubleJump Again"
+    message: "Double jump is ready again!"
     # Sound played when the player can jump again (set "" to disable)
-    sound: ""
+    sound: "BLOCK_NOTE_PLING"
   Errors:
     AlreadyJumped:
       # Message sent when the player can't jump again (set "" to disable)
-      message: "&bYou Already DoubleJumped Before"
+      message: "You’ve already used your double jump!"
       # Sound played when the player can't jump again (set "" to disable)
       sound: "ENTITY_VILLAGER_NO"
     Cooldown:
       # Message sent when jump is on cooldown (set "" to disable)
-      message: ""
+      message: "Please wait &c%time%s &bbefore using double jump again!"
       # Sound played when jump is on cooldown (set "" to disable)
-      sound: ""
+      sound: "BLOCK_NOTE_BASS"
     NotAvailable:
       # Message sent when the jump feature is not available (set "" to disable)
-      message: ""
+      message: "Double jump is currently unavailable."
       # Sound played when the jump feature is not available (set "" to disable)
-      sound: ""
+      sound: "BLOCK_ANVIL_LAND"
