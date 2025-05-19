@@ -8,9 +8,9 @@ import static me.vesder.blazeydoublejump.utils.TextUtils.getDoubleConfig;
 public class JumpUtility {
 
     public static final double
-            LAUNCH = getDoubleConfig("Settings.Launch"),
-            LAUNCHY = getDoubleConfig("Settings.LaunchY"),
-            COOLDOWN = getDoubleConfig("Settings.Cooldown");
+            LAUNCH = getDoubleConfig("Settings.Launch", 10D),
+            LAUNCHY = getDoubleConfig("Settings.LaunchY", 10D),
+            COOLDOWN = getDoubleConfig("Settings.Cooldown") * 1000L;
 
     private static final HashMap<UUID, Boolean> jumpStatus = new HashMap<>();
     private static final HashMap<UUID, Long> lastJumpTime = new HashMap<>();
@@ -24,6 +24,12 @@ public class JumpUtility {
     }
 
     public static boolean isJumpOnCooldown(UUID playerId) {
+
+        if (!lastJumpTime.containsKey(playerId)) {
+            setLastJumpTime(playerId);
+            return false;
+        }
+
         return System.currentTimeMillis() - lastJumpTime.get(playerId) < COOLDOWN;
     }
 

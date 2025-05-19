@@ -18,7 +18,12 @@ public class TextUtils {
 
     public static double getDoubleConfig(String path) {
 
-        return Math.min(getPlugin().getConfig().getDouble(path), 10);
+        return getPlugin().getConfig().getDouble(path);
+    }
+
+    public static double getDoubleConfig(String path, Double max) {
+
+        return Math.min(getPlugin().getConfig().getDouble(path), max);
     }
 
     public static boolean getBooleanConfig(String path) {
