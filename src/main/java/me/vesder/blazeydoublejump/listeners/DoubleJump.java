@@ -29,11 +29,20 @@ public class DoubleJump implements Listener {
             return;
         }
 
+        if (isJumpOnCooldown(player.getUniqueId())) {
+
+            VoidUtils.sendMsg(player,getStringConfig("Actions.Errors.Cooldown.message"));
+            VoidUtils.playStringSound(player,getStringConfig("Actions.Errors.Cooldown.sound"));
+            e.setCancelled(true);
+            return;
+        }
+
         VoidUtils.sendMsg(player, getStringConfig("Actions.OnJump.message"));
         VoidUtils.playStringSound(player, getStringConfig("Actions.OnJump.sound"));
 
         player.setVelocity(player.getLocation().getDirection().multiply(LAUNCH).setY(LAUNCHY));
         setJumpStatus(player.getUniqueId(), false);
+        setLastJumpTime(player.getUniqueId());
         e.setCancelled(true);
 
     }
