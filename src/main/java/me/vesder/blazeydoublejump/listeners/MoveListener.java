@@ -8,7 +8,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 import static me.vesder.blazeydoublejump.utils.JumpUtility.getJumpStatus;
 import static me.vesder.blazeydoublejump.utils.JumpUtility.setJumpStatus;
-import static me.vesder.blazeydoublejump.utils.TextUtils.getStringConfig;
 
 public class MoveListener implements Listener {
 
@@ -21,8 +20,8 @@ public class MoveListener implements Listener {
         if (getJumpStatus(player.getUniqueId()) || !player.isOnGround()) return;
 
         setJumpStatus(player.getUniqueId(), true);
-        VoidUtils.sendMsg(player, getStringConfig("Actions.OnActive.message"));
-        VoidUtils.playStringSound(player,getStringConfig("Actions.OnActive.sound"));
+        VoidUtils.sendMsg(player, "Actions.OnActive.message");
+        VoidUtils.playStringSound(player, "Actions.OnActive.sound");
 
     }
 
