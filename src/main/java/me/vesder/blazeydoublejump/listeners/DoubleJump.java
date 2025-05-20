@@ -7,6 +7,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static me.vesder.blazeydoublejump.utils.JumpUtility.*;
 
 public class DoubleJump implements Listener {
@@ -20,29 +23,32 @@ public class DoubleJump implements Listener {
             player.getGameMode() == GameMode.SPECTATOR ||
             !e.isFlying()) return;
 
+        Map<String, Object> placeholders = new HashMap<>();
+        placeholders.put("%cooldown%", getJumpCooldown(player.getUniqueId()));
+        placeholders.put("%player_name%", player.getDisplayName());
+
+        e.setCancelled(true);
+
         if (!getJumpStatus(player.getUniqueId())) {
 
-            VoidUtils.sendMsg(player, "Actions.Errors.AlreadyJumped.message");
+            VoidUtils.sendMsg(player, "Actions.Errors.AlreadyJumped.message", placeholders);
             VoidUtils.playStringSound(player, "Actions.Errors.AlreadyJumped.sound");
-            e.setCancelled(true);
             return;
         }
 
         if (isJumpOnCooldown(player.getUniqueId())) {
 
-            VoidUtils.sendMsg(player, "Actions.Errors.Cooldown.message");
+            VoidUtils.sendMsg(player, "Actions.Errors.Cooldown.message", placeholders);
             VoidUtils.playStringSound(player, "Actions.Errors.Cooldown.sound");
-            e.setCancelled(true);
             return;
         }
 
-        VoidUtils.sendMsg(player, "Actions.OnJump.message");
+        VoidUtils.sendMsg(player, "Actions.OnJump.message", placeholders);
         VoidUtils.playStringSound(player, "Actions.OnJump.sound");
 
         player.setVelocity(player.getLocation().getDirection().multiply(LAUNCH).setY(LAUNCHY));
         setJumpStatus(player.getUniqueId(), false);
         setLastJumpTime(player.getUniqueId());
-        e.setCancelled(true);
 
     }
 
