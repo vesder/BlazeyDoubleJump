@@ -17,6 +17,7 @@ Actions:
   # Actions executed when the player jumps
   OnJump:
     # Message sent after the jump (set "" to disable)
+    # List of available placeholders : %player_name%, %cooldown%
     message: "Woosh! You launched into the air!"
     # Sound played when the player jumps (set "" to disable)
     # List of available sounds: https://helpch.at/docs/1.12/index.html?org/bukkit/Sound.html
@@ -36,7 +37,7 @@ Actions:
       sound: "ENTITY_VILLAGER_NO"
     Cooldown:
       # Message sent when jump is on cooldown (set "" to disable)
-      message: "Please wait &c%time%s &bbefore using double jump again!"
+      message: "Please wait &c%cooldown%s &bbefore using double jump again!"
       # Sound played when jump is on cooldown (set "" to disable)
       sound: "BLOCK_NOTE_BASS"
     NotAvailable:
