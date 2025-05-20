@@ -31,6 +31,9 @@ public class JumpUtility {
     }
 
     public static double getJumpCooldown(UUID playerId) {
+
+        if (!lastJumpTime.containsKey(playerId)) return 0;
+
         return COOLDOWN - (System.currentTimeMillis() - lastJumpTime.get(playerId)) / 1000D;
     }
 
