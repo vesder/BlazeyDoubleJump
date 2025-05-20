@@ -33,6 +33,10 @@ public class JumpUtility {
         return System.currentTimeMillis() - lastJumpTime.get(playerId) < COOLDOWN;
     }
 
+    public static double getJumpCooldown(UUID playerId) {
+        return COOLDOWN - (System.currentTimeMillis() - lastJumpTime.get(playerId)) / 1000D;
+    }
+
     public static void setLastJumpTime(UUID playerId) {
         lastJumpTime.put(playerId, System.currentTimeMillis());
     }
