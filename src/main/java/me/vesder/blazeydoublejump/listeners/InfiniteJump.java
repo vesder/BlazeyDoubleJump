@@ -8,7 +8,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 
 import static me.vesder.blazeydoublejump.utils.JumpUtility.*;
-import static me.vesder.blazeydoublejump.utils.TextUtils.*;
 
 public class InfiniteJump implements Listener {
 
@@ -23,14 +22,14 @@ public class InfiniteJump implements Listener {
 
         if (isJumpOnCooldown(player.getUniqueId())) {
 
-            VoidUtils.sendMsg(player,getStringConfig("Actions.Errors.Cooldown.message"));
-            VoidUtils.playStringSound(player,getStringConfig("Actions.Errors.Cooldown.sound"));
+            VoidUtils.sendMsg(player, "Actions.Errors.Cooldown.message");
+            VoidUtils.playStringSound(player, "Actions.Errors.Cooldown.sound");
             e.setCancelled(true);
             return;
         }
 
-        VoidUtils.sendMsg(player, getStringConfig("Actions.OnJump.message"));
-        VoidUtils.playStringSound(player, getStringConfig("Actions.OnJump.sound"));
+        VoidUtils.sendMsg(player, "Actions.OnJump.message");
+        VoidUtils.playStringSound(player, "Actions.OnJump.sound");
 
         player.setVelocity(player.getLocation().getDirection().multiply(LAUNCH).setY(LAUNCHY));
         setLastJumpTime(player.getUniqueId());
