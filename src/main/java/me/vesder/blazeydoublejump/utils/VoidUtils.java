@@ -3,6 +3,8 @@ package me.vesder.blazeydoublejump.utils;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
+import java.util.Map;
+
 import static me.vesder.blazeydoublejump.utils.TextUtils.color;
 import static me.vesder.blazeydoublejump.utils.TextUtils.getStringConfig;
 
@@ -10,14 +12,31 @@ public class VoidUtils {
 
     private static final String prefix = getStringConfig("Actions.prefix");
 
-    public static void sendMsg(Player player, String message) {
+    public static void sendMsg(Player player, String configPath) {
+
+        String message = getStringConfig(configPath);
 
         if (message.isEmpty()) return;
 
         player.sendMessage(color(prefix + message));
     }
 
-    public static void playStringSound(Player player, String sound) {
+    public static void sendMsg(Player player, String configPath, Map<String, Object> placeholders) {
+
+        String message = getStringConfig(configPath);
+
+        if (message.isEmpty()) return;
+
+        for (Map.Entry<String, Object> entry : placeholders.entrySet()) {
+            message = message.replace(entry.getKey(), String.valueOf(entry.getValue()));
+        }
+
+        player.sendMessage(color(prefix + message));
+    }
+
+    public static void playStringSound(Player player, String configPath) {
+
+        String sound = getStringConfig(configPath);
 
         if (sound.isEmpty()) return;
 
