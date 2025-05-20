@@ -25,10 +25,7 @@ public class JumpUtility {
 
     public static boolean isJumpOnCooldown(UUID playerId) {
 
-        if (!lastJumpTime.containsKey(playerId)) {
-            setLastJumpTime(playerId);
-            return false;
-        }
+        if (!lastJumpTime.containsKey(playerId)) return false;
 
         return System.currentTimeMillis() - lastJumpTime.get(playerId) < COOLDOWN;
     }
