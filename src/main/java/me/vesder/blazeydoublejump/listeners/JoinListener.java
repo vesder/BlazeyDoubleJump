@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import static me.vesder.blazeydoublejump.utils.JumpUtility.setJumpStatus;
+import static me.vesder.blazeydoublejump.jumps.JumpUtility.setJumpStatus;
 
 public class JoinListener implements Listener {
 
