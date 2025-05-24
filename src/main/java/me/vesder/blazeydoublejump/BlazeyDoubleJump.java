@@ -29,7 +29,7 @@ public final class BlazeyDoubleJump extends JavaPlugin {
         getLogger().info(color("&d=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ★"));
         getLogger().info(color("&d      BlazeyDoubleJump  "));
         getLogger().info(""); // Blank line for readability
-        getLogger().info(color("&d      V:1.2    "));
+        getLogger().info(color("&d      V:" + getDescription().getVersion()));
         getLogger().info(color("&d      Made By @Vesder      "));
         getLogger().info(color("&dContact Me In Discord For Support"));
         getLogger().info(color("&d=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ★"));
