@@ -4,7 +4,6 @@ import me.vesder.blazeydoublejump.jumps.DoubleJump;
 import me.vesder.blazeydoublejump.jumps.InfiniteJump;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import static me.vesder.blazeydoublejump.utils.TextUtils.color;
 import static me.vesder.blazeydoublejump.utils.TextUtils.getBooleanConfig;
 import static org.bukkit.Bukkit.getPluginManager;
 
@@ -26,13 +25,13 @@ public final class BlazeyDoubleJump extends JavaPlugin {
         getPluginManager().registerEvents(
             getBooleanConfig("Settings.InfiniteJump") ? new InfiniteJump() : new DoubleJump(), this);
 
-        getLogger().info(color("&d=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ★"));
-        getLogger().info(color("&d      BlazeyDoubleJump  "));
+        getLogger().info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ★");
+        getLogger().info("      BlazeyDoubleJump  ");
         getLogger().info(""); // Blank line for readability
-        getLogger().info(color("&d      V:" + getDescription().getVersion()));
-        getLogger().info(color("&d      Made By @Vesder      "));
-        getLogger().info(color("&dContact Me In Discord For Support"));
-        getLogger().info(color("&d=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ★"));
+        getLogger().info("      V:" + getDescription().getVersion());
+        getLogger().info("      Made By @Vesder      ");
+        getLogger().info("Contact Me In Discord For Support");
+        getLogger().info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ★");
 
     }
 
