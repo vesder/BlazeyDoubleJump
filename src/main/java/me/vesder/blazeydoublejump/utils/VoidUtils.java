@@ -2,7 +2,6 @@ package me.vesder.blazeydoublejump.utils;
 
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-
 import java.util.Map;
 
 import static me.vesder.blazeydoublejump.utils.TextUtils.color;
