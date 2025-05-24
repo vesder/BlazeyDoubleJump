@@ -12,7 +12,7 @@ public class VoidUtils {
 
     private static final String prefix = getStringConfig("Actions.prefix");
 
-    public static void sendMsg(Player player, String configPath) {
+    public static void sendMessage(Player player, String configPath) {
 
         String message = getStringConfig(configPath);
 
@@ -21,7 +21,7 @@ public class VoidUtils {
         player.sendMessage(color(prefix + message));
     }
 
-    public static void sendMsg(Player player, String configPath, Map<String, Object> placeholders) {
+    public static void sendMessage(Player player, String configPath, Map<String, Object> placeholders) {
 
         String message = getStringConfig(configPath);
 
