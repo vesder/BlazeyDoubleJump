@@ -8,9 +8,9 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-import static me.vesder.blazeydoublejump.jumps.JumpUtility.getJumpCooldownRemaining;
-import static me.vesder.blazeydoublejump.jumps.JumpUtility.getJumpStatus;
-import static me.vesder.blazeydoublejump.jumps.JumpUtility.setJumpStatus;
+import static me.vesder.blazeydoublejump.jumps.JumpUtility.getJumpCooldownLeft;
+import static me.vesder.blazeydoublejump.jumps.JumpUtility.isJumpAllowed;
+import static me.vesder.blazeydoublejump.jumps.JumpUtility.setJumpAllowed;
 
 public class MoveListener implements Listener {
 
@@ -20,15 +20,15 @@ public class MoveListener implements Listener {
         Player player = e.getPlayer();
 
         if (!player.getAllowFlight()) player.setAllowFlight(true);
-        if (getJumpStatus(player.getUniqueId()) || !player.isOnGround()) return;
+        if (isJumpAllowed(player.getUniqueId()) || !player.isOnGround()) return;
 
         Map<String, Object> placeholders = new HashMap<>();
-        placeholders.put("%cooldown%", getJumpCooldownRemaining(player.getUniqueId()));
+        placeholders.put("%cooldown%", getJumpCooldownLeft(player.getUniqueId()));
         placeholders.put("%player_name%", player.getDisplayName());
 
         e.setCancelled(true);
 
-        setJumpStatus(player.getUniqueId(), true);
+        setJumpAllowed(player.getUniqueId(), true);
         VoidUtils.sendMessage(player, "Actions.OnActive.message", placeholders);
         VoidUtils.playStringSound(player, "Actions.OnActive.sound");
 
