@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import static me.vesder.blazeydoublejump.jumps.JumpUtility.setJumpStatus;
+import static me.vesder.blazeydoublejump.jumps.JumpUtility.setJumpAllowed;
 
 public class JoinListener implements Listener {
 
@@ -15,7 +15,7 @@ public class JoinListener implements Listener {
 
         Player player = event.getPlayer();
 
-        setJumpStatus(player.getUniqueId(), true);
+        setJumpAllowed(player.getUniqueId(), true);
 
         if (player.getGameMode() == GameMode.CREATIVE && player.getGameMode() == GameMode.SPECTATOR) return;
 
