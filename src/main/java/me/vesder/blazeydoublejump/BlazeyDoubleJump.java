@@ -1,13 +1,11 @@
 package me.vesder.blazeydoublejump;
 
-import me.vesder.blazeydoublejump.listeners.DoubleJump;
-import me.vesder.blazeydoublejump.listeners.InfiniteJump;
-import me.vesder.blazeydoublejump.listeners.JoinListener;
-import me.vesder.blazeydoublejump.listeners.MoveListener;
+import me.vesder.blazeydoublejump.jumps.DoubleJump;
+import me.vesder.blazeydoublejump.jumps.InfiniteJump;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import static me.vesder.blazeydoublejump.utils.TextUtils.*;
-import static org.bukkit.Bukkit.getConsoleSender;
+import static me.vesder.blazeydoublejump.utils.TextUtils.color;
+import static me.vesder.blazeydoublejump.utils.TextUtils.getBooleanConfig;
 import static org.bukkit.Bukkit.getPluginManager;
 
 public final class BlazeyDoubleJump extends JavaPlugin {
@@ -25,21 +23,16 @@ public final class BlazeyDoubleJump extends JavaPlugin {
 
         saveDefaultConfig();
 
-        if (getBooleanConfig("Settings.InfiniteJump")) {
-            getPluginManager().registerEvents(new InfiniteJump(), this);
-        } else {
-            getPluginManager().registerEvents(new DoubleJump(), this);
-            getPluginManager().registerEvents(new MoveListener(), this);
-        }
-        getPluginManager().registerEvents(new JoinListener(), this);
+        getPluginManager().registerEvents(
+            getBooleanConfig("Settings.InfiniteJump") ? new InfiniteJump() : new DoubleJump(), this);
 
-        getConsoleSender().sendMessage(color("&d=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ★"));
-        getConsoleSender().sendMessage(color("&d      BlazeyDoubleJump  "));
-        getConsoleSender().sendMessage(""); // Blank line for readability
-        getConsoleSender().sendMessage(color("&d      V:1.2    "));
-        getConsoleSender().sendMessage(color("&d      Made By @Vesder      "));
-        getConsoleSender().sendMessage(color("&dContact Me In Discord For Support"));
-        getConsoleSender().sendMessage(color("&d=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ★"));
+        getLogger().info(color("&d=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ★"));
+        getLogger().info(color("&d      BlazeyDoubleJump  "));
+        getLogger().info(""); // Blank line for readability
+        getLogger().info(color("&d      V:1.2    "));
+        getLogger().info(color("&d      Made By @Vesder      "));
+        getLogger().info(color("&dContact Me In Discord For Support"));
+        getLogger().info(color("&d=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ★"));
 
     }
 
