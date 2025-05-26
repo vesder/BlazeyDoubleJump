@@ -1,5 +1,6 @@
 package me.vesder.blazeydoublejump;
 
+import me.vesder.blazeydoublejump.commands.CommandManager;
 import me.vesder.blazeydoublejump.jumps.DoubleJump;
 import me.vesder.blazeydoublejump.jumps.InfiniteJump;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,6 +25,8 @@ public final class BlazeyDoubleJump extends JavaPlugin {
 
         getPluginManager().registerEvents(
             getBooleanConfig("Settings.InfiniteJump") ? new InfiniteJump() : new DoubleJump(), this);
+
+        getCommand("blazeydoublejump").setExecutor(new CommandManager());
 
         getLogger().info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ★");
         getLogger().info("      BlazeyDoubleJump  ");
