@@ -4,3 +4,10 @@ main: me.vesder.blazeydoublejump.BlazeyDoubleJump
 api-version: "1.13"
 authors: [ vesder ]
 description: A simple double jump plugin for bukkit servers
+commands:
+  blazeydoublejump:
+    description: Plugin main command
+    usage: /<command>
+    aliases:
+      - bdoublejump
+      - bdj
