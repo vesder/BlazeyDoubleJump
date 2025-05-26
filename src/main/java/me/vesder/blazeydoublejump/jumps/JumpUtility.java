@@ -15,7 +15,6 @@ public class JumpUtility {
     private static final HashMap<UUID, Boolean> jumpStatus = new HashMap<>();
     private static final HashMap<UUID, Long> lastJumpTime = new HashMap<>();
 
-
     /**
      * Sets whether the player is currently allowed to jump.
      *
