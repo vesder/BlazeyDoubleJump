@@ -13,10 +13,16 @@ import java.util.List;
 public class CommandManager implements TabExecutor {
 
     private static final List<SubCommand> subCommands = new ArrayList<>();
+    private static final List<String> subCommandNames = new ArrayList<>();
 
-    public CommandManager() {
+    static {
 
         subCommands.add(new HelpCommand());
+
+        for (SubCommand subCommand : getSubCommands()) {
+
+            subCommandNames.add(subCommand.getName());
+        }
 
     }
 
@@ -29,23 +35,13 @@ public class CommandManager implements TabExecutor {
      */
     public static List<String> getSubCommandNames(String... excludedNames) {
 
-        List<String> excludeList = new ArrayList<>();
-        List<String> subcommandsArguments = new ArrayList<>();
+        List<String> filteredNames = new ArrayList<>(subCommandNames);
 
         for (String excludedName : excludedNames) {
-            excludeList.add(excludedName.toLowerCase());
+            filteredNames.remove(excludedName);
         }
 
-        for (SubCommand subCommand : getSubCommands()) {
-
-            if (excludeList.contains(subCommand.getName().toLowerCase())) {
-                continue;
-            }
-
-            subcommandsArguments.add(subCommand.getName());
-        }
-
-        return subcommandsArguments;
+        return filteredNames;
     }
 
     @Override
