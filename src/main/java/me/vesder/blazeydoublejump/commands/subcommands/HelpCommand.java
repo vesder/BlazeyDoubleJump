@@ -30,7 +30,7 @@ public class HelpCommand implements SubCommand {
                 .append("\n \n");
         }
 
-        message.append("&b=======================================");
+        message.append("&b=====&6=============================&b=====");
 
         return defaultHelpMessage = color(message.toString());
     }
