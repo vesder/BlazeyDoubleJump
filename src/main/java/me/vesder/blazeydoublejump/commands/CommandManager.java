@@ -1,11 +1,12 @@
 package me.vesder.blazeydoublejump.commands;
 
+import me.vesder.blazeydoublejump.commands.subcommands.ActionsCommand;
 import me.vesder.blazeydoublejump.commands.subcommands.HelpCommand;
+import me.vesder.blazeydoublejump.commands.subcommands.SettingsCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +18,9 @@ public class CommandManager implements TabExecutor {
 
     static {
 
+        subCommands.add(new ActionsCommand());
         subCommands.add(new HelpCommand());
+        subCommands.add(new SettingsCommand());
 
         for (SubCommand subCommand : getSubCommands()) {
 
