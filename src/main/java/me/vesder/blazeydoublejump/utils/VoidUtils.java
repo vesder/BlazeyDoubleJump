@@ -4,8 +4,8 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import java.util.Map;
 
+import static me.vesder.blazeydoublejump.utils.ConfigUtils.getStringConfig;
 import static me.vesder.blazeydoublejump.utils.TextUtils.color;
-import static me.vesder.blazeydoublejump.utils.TextUtils.getStringConfig;
 
 public class VoidUtils {
 

@@ -3,7 +3,7 @@ package me.vesder.blazeydoublejump.jumps;
 import java.util.HashMap;
 import java.util.UUID;
 
-import static me.vesder.blazeydoublejump.utils.TextUtils.getDoubleConfig;
+import static me.vesder.blazeydoublejump.utils.ConfigUtils.getDoubleConfig;
 
 public class JumpUtility {
 
