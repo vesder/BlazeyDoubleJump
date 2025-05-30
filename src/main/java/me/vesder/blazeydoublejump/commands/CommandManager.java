@@ -8,19 +8,26 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CommandManager implements TabExecutor {
 
-    private static final List<SubCommand> subCommands = new ArrayList<>();
+    private static final Map<String, SubCommand> subCommandMap = new HashMap<>();
     private static final List<String> subCommandNames = new ArrayList<>();
 
     static {
 
-        subCommands.add(new ActionsCommand());
-        subCommands.add(new HelpCommand());
-        subCommands.add(new SettingsCommand());
+        registerSubCommands(
+
+            new ActionsCommand(),
+            new HelpCommand(),
+            new SettingsCommand()
+
+        );
 
         for (SubCommand subCommand : getSubCommands()) {
 
@@ -29,8 +36,20 @@ public class CommandManager implements TabExecutor {
 
     }
 
-    public static List<SubCommand> getSubCommands() {
-        return subCommands;
+    private static void registerSubCommands(SubCommand... subCommands) {
+
+        for (SubCommand subCommand : subCommands) {
+            subCommandMap.put(subCommand.getName().toLowerCase(), subCommand);
+        }
+
+    }
+
+    public static SubCommand getSubCommand(String name) {
+        return subCommandMap.get(name.toLowerCase());
+    }
+
+    public static Collection<SubCommand> getSubCommands() {
+        return subCommandMap.values();
     }
 
     /**
