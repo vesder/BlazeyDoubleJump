@@ -17,7 +17,6 @@ import java.util.Map;
 public class CommandManager implements TabExecutor {
 
     private static final Map<String, SubCommand> subCommandMap = new HashMap<>();
-    private static final List<String> subCommandNames = new ArrayList<>();
 
     static {
 
@@ -28,11 +27,6 @@ public class CommandManager implements TabExecutor {
             new SettingsCommand()
 
         );
-
-        for (SubCommand subCommand : getSubCommands()) {
-
-            subCommandNames.add(subCommand.getName());
-        }
 
     }
 
@@ -57,10 +51,10 @@ public class CommandManager implements TabExecutor {
      */
     public static List<String> getSubCommandNames(String... excludedNames) {
 
-        List<String> filteredNames = new ArrayList<>(subCommandNames);
+        List<String> filteredNames = new ArrayList<>(subCommandMap.keySet());
 
         for (String excludedName : excludedNames) {
-            filteredNames.remove(excludedName);
+            filteredNames.remove(excludedName.toLowerCase());
         }
 
         return filteredNames;
