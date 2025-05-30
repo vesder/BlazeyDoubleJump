@@ -77,22 +77,11 @@ public class CommandManager implements TabExecutor {
         Player player = (Player) sender;
 
         if (args.length == 0) {
-
-            for (SubCommand subCommand : getSubCommands()) {
-                if (subCommand.getName().equalsIgnoreCase("help")) {
-                    subCommand.perform(player, args);
-                    break;
-                }
-            }
-
+            getSubCommand("help").perform(player, args);
             return true;
         }
 
-        for (SubCommand subCommand : getSubCommands()) {
-            if (args[0].equalsIgnoreCase(subCommand.getName())) {
-                subCommand.perform(player, args);
-            }
-        }
+        getSubCommand(args[0]).perform(player, args);
 
         return true;
     }
@@ -101,16 +90,11 @@ public class CommandManager implements TabExecutor {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 
         if (args.length == 1) {
-
             return getSubCommandNames();
         }
 
         if (args.length >= 2) {
-            for (SubCommand subCommand : getSubCommands()) {
-                if (args[0].equalsIgnoreCase(subCommand.getName())) {
-                    return subCommand.getSubcommandArguments((Player) sender, args);
-                }
-            }
+            return getSubCommand(args[0]).getSubcommandArguments((Player) sender, args);
         }
 
         return Collections.emptyList();
