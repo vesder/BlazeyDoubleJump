@@ -26,8 +26,6 @@ public class MoveListener implements Listener {
         placeholders.put("%cooldown%", getJumpCooldownLeft(player.getUniqueId()));
         placeholders.put("%player_name%", player.getDisplayName());
 
-        e.setCancelled(true);
-
         setJumpAllowed(player.getUniqueId(), true);
         VoidUtils.sendMessage(player, "Actions.OnActive.message", placeholders);
         VoidUtils.playStringSound(player, "Actions.OnActive.sound");
