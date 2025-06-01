@@ -71,7 +71,7 @@ public class HelpCommand implements SubCommand {
 
     @Override
     public String getDescription() {
-        return "help desc";
+        return "Shows help information for commands";
     }
 
     @Override
