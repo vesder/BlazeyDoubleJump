@@ -70,13 +70,12 @@ public class CommandManager implements TabExecutor {
 
         Player player = (Player) sender;
 
-        if (args.length == 0) {
-            getSubCommand("help").perform(player, args);
+        if (args.length >= 1 && getSubCommandNames().contains(args[0].toLowerCase())) {
+            getSubCommand(args[0]).perform(player, args);
             return true;
         }
 
-        getSubCommand(args[0]).perform(player, args);
-
+        getSubCommand("help").perform(player, args);
         return true;
     }
 
@@ -87,7 +86,7 @@ public class CommandManager implements TabExecutor {
             return getSubCommandNames();
         }
 
-        if (args.length >= 2) {
+        if (args.length >= 2 && getSubCommandNames().contains(args[0].toLowerCase())) {
             return getSubCommand(args[0]).getSubcommandArguments((Player) sender, args);
         }
 
