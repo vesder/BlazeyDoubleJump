@@ -53,7 +53,7 @@ public class HelpCommand implements SubCommand {
         StringBuilder helpMessageBuilder = new StringBuilder();
         helpMessageBuilder.append(HEADER);
 
-        for (String subArg : getSubCommand(commandName).getSubcommandArguments(null, new String[2])) {
+        for (String subArg : getSubCommand(commandName).getSubcommandArguments(new String[]{commandName, ""})) {
             helpMessageBuilder.append("/bdj ").append(commandName).append(" ").append(subArg)
                 .append("\n \n");
         }
@@ -91,7 +91,7 @@ public class HelpCommand implements SubCommand {
     }
 
     @Override
-    public List<String> getSubcommandArguments(Player player, String[] args) {
+    public List<String> getSubcommandArguments(String[] args) {
 
         if (args.length == 2) {
             return CommandManager.getSubCommandNames(getName());
