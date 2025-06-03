@@ -12,8 +12,8 @@ public interface SubCommand {
 
     String getSyntax();
 
-    void perform(Player player, String args[]);
+    void perform(Player player, String[] args);
 
-    List<String> getSubcommandArguments(Player player, String args[]);
+    List<String> getSubcommandArguments(String[] args);
 
 }
