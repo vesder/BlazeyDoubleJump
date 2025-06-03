@@ -11,6 +11,7 @@ import static me.vesder.blazeydoublejump.BlazeyDoubleJump.getPlugin;
 public class ConfigUtils {
 
     private static final Map<String, String> keyMapCache = new HashMap<>(); // lowercase -> actual path
+    private static final Map<String, Set<String>> configMapCache = new HashMap<>(); // path -> value
 
     public static void setConfig(String path, Object value) {
 
@@ -36,22 +37,26 @@ public class ConfigUtils {
         throw new RuntimeException("Config path not found (ignoreCase): " + path);
     }
 
-//    public void configEditor() {
-//
-//    }
+//    public void configEditor() {}
 
     public static Set<String> configReader(String path) {
+
+        String lowerPath = path.toLowerCase();
+
+        if (configMapCache.containsKey(lowerPath)) {
+            return configMapCache.get(lowerPath);
+        }
 
         try {
 
             Object value = getPlugin().getConfig().get(findRealPath(path));
 
-            if (!(value instanceof ConfigurationSection)) {
-                return Collections.singleton(value.toString());
-            }
+            Set<String> result = value instanceof ConfigurationSection
+                ? ((ConfigurationSection) value).getKeys(false)
+                : Collections.singleton(value.toString());
 
-            ConfigurationSection section = (ConfigurationSection) value;
-            return section.getKeys(false);
+            configMapCache.put(lowerPath, result);
+            return result;
 
         } catch (RuntimeException ex) {
 
