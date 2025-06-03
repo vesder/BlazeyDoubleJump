@@ -1,7 +1,10 @@
 package me.vesder.blazeydoublejump.utils;
 
+import org.bukkit.configuration.ConfigurationSection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import static me.vesder.blazeydoublejump.BlazeyDoubleJump.getPlugin;
 
@@ -31,6 +34,30 @@ public class ConfigUtils {
         }
 
         throw new RuntimeException("Config path not found (ignoreCase): " + path);
+    }
+
+//    public void configEditor() {
+//
+//    }
+
+    public static Set<String> configReader(String path) {
+
+        try {
+
+            Object value = getPlugin().getConfig().get(findRealPath(path));
+
+            if (!(value instanceof ConfigurationSection)) {
+                return Collections.singleton(value.toString());
+            }
+
+            ConfigurationSection section = (ConfigurationSection) value;
+            return section.getKeys(false);
+
+        } catch (RuntimeException ex) {
+
+            return Collections.emptySet();
+        }
+
     }
 
     public static String getStringConfig(String path) {
