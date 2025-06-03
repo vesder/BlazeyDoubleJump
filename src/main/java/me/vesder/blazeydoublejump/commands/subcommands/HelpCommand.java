@@ -15,7 +15,7 @@ import static me.vesder.blazeydoublejump.utils.TextUtils.color;
 
 public class HelpCommand implements SubCommand {
 
-    private final Map<String, String> cachedHelpMessages = new HashMap<>();
+    private final Map<String, String> cachedHelpMessages = new HashMap<>(); // name -> message
 
     private static final String HEADER = "&b=====&6===== &d&lBlazeyDoubleJump &6=====&b=====&f\n \n";
     private static final String FOOTER = "&b=====&6=============================&b=====";
