@@ -3,14 +3,13 @@ package me.vesder.blazeydoublejump.commands.subcommands;
 import me.vesder.blazeydoublejump.commands.SubCommand;
 import me.vesder.blazeydoublejump.utils.TextUtils;
 import org.bukkit.entity.Player;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import java.util.logging.Level;
 
 import static me.vesder.blazeydoublejump.commands.CommandManager.getSubCommand;
-import static me.vesder.blazeydoublejump.utils.ConfigUtils.getDoubleConfig;
+import static me.vesder.blazeydoublejump.utils.ConfigUtils.configReader;
 import static me.vesder.blazeydoublejump.utils.ConfigUtils.setConfig;
 import static org.bukkit.Bukkit.getLogger;
 
@@ -59,25 +58,8 @@ public class SettingsCommand implements SubCommand {
     }
 
     @Override
-    public Set<String> getSubcommandArguments(String[] args) {
+    public List<String> getSubcommandArguments(String[] args) {
 
-        if (args.length == 2) {
-            return new HashSet<>(Arrays.asList("InfiniteJump", "Launch", "LaunchY", "Cooldown"));
-        }
-
-        if (args.length == 3) {
-            switch (args[1].toLowerCase()) {
-                case "infinitejump":
-                    return new HashSet<>(Arrays.asList("true", "false"));
-                case "launch":
-                    return Collections.singleton(String.valueOf(getDoubleConfig("Settings.Launch", 10D)));
-                case "launchy":
-                    return Collections.singleton(String.valueOf(getDoubleConfig("Settings.LaunchY", 10D)));
-                case "cooldown":
-                    return Collections.singleton(String.valueOf(getDoubleConfig("Settings.Cooldown")));
-            }
-        }
-
-        return Collections.emptySet();
+        return new ArrayList<>(configReader(String.join(".", Arrays.copyOfRange(args, 0, args.length - 1))));
     }
 }
