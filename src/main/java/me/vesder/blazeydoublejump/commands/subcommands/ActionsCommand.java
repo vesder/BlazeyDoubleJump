@@ -2,8 +2,8 @@ package me.vesder.blazeydoublejump.commands.subcommands;
 
 import me.vesder.blazeydoublejump.commands.SubCommand;
 import org.bukkit.entity.Player;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Set;
 
 import static me.vesder.blazeydoublejump.utils.ConfigUtils.configReader;
 
@@ -29,8 +29,8 @@ public class ActionsCommand implements SubCommand {
     }
 
     @Override
-    public List<String> getSubcommandArguments(Player player, String[] args) {
+    public Set<String> getSubcommandArguments(String[] args) {
 
-        return new ArrayList<>(configReader(String.join(".", args)));
+        return configReader(String.join(".", Arrays.copyOfRange(args, 0, args.length - 1)));
     }
 }
