@@ -11,3 +11,19 @@ commands:
     aliases:
       - bdoublejump
       - bdj
+    permission: blazeydoublejump.command
+    permission-message: You do not have permission to use this command.
+
+permissions:
+  blazeydoublejump.admin:
+    description: Grants full administrative access to all BlazeyDoubleJump commands and settings.
+    default: op
+    children:
+      blazeydoublejump.command: true
+      blazeydoublejump.command.settings: true
+  blazeydoublejump.command:
+    description: Allows use of the main /bdj command
+    default: op
+  blazeydoublejump.command.settings:
+    description: Allows use of /bdj settings to change plugin options.
+    default: op
