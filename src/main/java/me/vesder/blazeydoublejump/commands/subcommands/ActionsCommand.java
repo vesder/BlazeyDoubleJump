@@ -2,9 +2,10 @@ package me.vesder.blazeydoublejump.commands.subcommands;
 
 import me.vesder.blazeydoublejump.commands.SubCommand;
 import org.bukkit.entity.Player;
-
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
+
+import static me.vesder.blazeydoublejump.utils.ConfigUtils.configReader;
 
 public class ActionsCommand implements SubCommand {
     @Override
@@ -14,12 +15,12 @@ public class ActionsCommand implements SubCommand {
 
     @Override
     public String getDescription() {
-        return "Actions Desc";
+        return "Modify plugin actions";
     }
 
     @Override
     public String getSyntax() {
-        return "/bdj actions";
+        return "/bdj actions <option> <value>";
     }
 
     @Override
@@ -29,6 +30,7 @@ public class ActionsCommand implements SubCommand {
 
     @Override
     public List<String> getSubcommandArguments(Player player, String[] args) {
-        return Collections.emptyList();
+
+        return new ArrayList<>(configReader(String.join(".", args)));
     }
 }
