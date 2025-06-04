@@ -1,4 +1,4 @@
-package me.vesder.blazeydoublejump.utils;
+package me.vesder.blazeydoublejump.config;
 
 import org.bukkit.configuration.ConfigurationSection;
 import java.util.Collections;
