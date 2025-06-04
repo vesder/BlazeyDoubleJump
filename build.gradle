@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'me.vesder'
-version = '1.2'
+version = '1.2-BETA'
 
 repositories {
     mavenCentral()
