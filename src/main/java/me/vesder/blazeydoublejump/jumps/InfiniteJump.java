@@ -2,6 +2,9 @@ package me.vesder.blazeydoublejump.jumps;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import me.vesder.blazeydoublejump.data.User;
+import me.vesder.blazeydoublejump.data.UserManager;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,7 +18,6 @@ import static me.vesder.blazeydoublejump.jumps.JumpUtility.LAUNCH;
 import static me.vesder.blazeydoublejump.jumps.JumpUtility.LAUNCHY;
 import static me.vesder.blazeydoublejump.jumps.JumpUtility.getJumpCooldownLeft;
 import static me.vesder.blazeydoublejump.jumps.JumpUtility.isJumpOnCooldown;
-import static me.vesder.blazeydoublejump.jumps.JumpUtility.setLastJumpTime;
 import static org.bukkit.Bukkit.getPluginManager;
 
 public class InfiniteJump implements Listener {
@@ -54,7 +56,9 @@ public class InfiniteJump implements Listener {
         VoidUtils.playStringSound(player, "Actions.OnJump.sound");
 
         player.setVelocity(player.getLocation().getDirection().multiply(LAUNCH).setY(LAUNCHY));
-        setLastJumpTime(player.getUniqueId());
+        User user = UserManager.getUser(player.getUniqueId());
+        user.setLastJumpTime(System.currentTimeMillis());
+
     }
 
 }

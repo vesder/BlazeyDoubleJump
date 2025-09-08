@@ -37,8 +37,6 @@ public class ConfigUtils {
         throw new RuntimeException("Config path not found (ignoreCase): " + path);
     }
 
-//    public void configEditor() {}
-
     public static Set<String> configReader(String path) {
 
         String lowerPath = path.toLowerCase();
@@ -83,6 +81,15 @@ public class ConfigUtils {
     public static boolean getBooleanConfig(String path) {
 
         return getPlugin().getConfig().getBoolean(path);
+    }
+
+    // New Configuration System
+
+    private static final ConfigManager configManager = ConfigManager.getConfigManager();
+
+    public static String getStringConfig(String configName, String path) {
+
+        return configManager.getCustomConfig(configName).config.getString(path);
     }
 
 }

@@ -1,6 +1,8 @@
 package me.vesder.blazeydoublejump.jumps;
 
-import java.util.HashMap;
+import me.vesder.blazeydoublejump.data.User;
+import me.vesder.blazeydoublejump.data.UserManager;
+
 import java.util.UUID;
 
 import static me.vesder.blazeydoublejump.config.ConfigUtils.getDoubleConfig;
@@ -12,38 +14,6 @@ public class JumpUtility {
         LAUNCHY = getDoubleConfig("Settings.LaunchY", 10D),
         COOLDOWN = getDoubleConfig("Settings.Cooldown") * 1000L;
 
-    private static final HashMap<UUID, Boolean> jumpStatus = new HashMap<>();
-    private static final HashMap<UUID, Long> lastJumpTime = new HashMap<>();
-
-    /**
-     * Sets whether the player is currently allowed to jump.
-     *
-     * @param playerId the UUID of the player
-     * @param status   true if the player is allowed to jump; false otherwise
-     */
-    public static void setJumpAllowed(UUID playerId, Boolean status) {
-        jumpStatus.put(playerId, status);
-    }
-
-    /**
-     * Returns whether the player is currently allowed to jump.
-     *
-     * @param playerId the UUID of the player
-     * @return true if the player is allowed to jump; false otherwise
-     */
-    public static boolean isJumpAllowed(UUID playerId) {
-        return jumpStatus.get(playerId);
-    }
-
-    /**
-     * Records the current time as the player's last jump time.
-     *
-     * @param playerId the UUID of the player
-     */
-    public static void setLastJumpTime(UUID playerId) {
-        lastJumpTime.put(playerId, System.currentTimeMillis());
-    }
-
     /**
      * Checks if the player is currently on cooldown and cannot jump yet.
      *
@@ -52,9 +22,11 @@ public class JumpUtility {
      */
     public static boolean isJumpOnCooldown(UUID playerId) {
 
-        if (!lastJumpTime.containsKey(playerId)) return false;
+        User user = UserManager.getUser(playerId);
 
-        return System.currentTimeMillis() - lastJumpTime.get(playerId) < COOLDOWN;
+        if (user.getLastJumpTime() == 0) return false;
+
+        return System.currentTimeMillis() - user.getLastJumpTime() < COOLDOWN;
     }
 
     /**
@@ -65,9 +37,11 @@ public class JumpUtility {
      */
     public static int getJumpCooldownLeft(UUID playerId) {
 
-        if (!lastJumpTime.containsKey(playerId)) return 0;
+        User user = UserManager.getUser(playerId);
 
-        return (int) ((COOLDOWN - (System.currentTimeMillis() - lastJumpTime.get(playerId))) / 1000);
+        if (user.getLastJumpTime() == 0) return 0;
+
+        return (int) ((COOLDOWN - (System.currentTimeMillis() - user.getLastJumpTime())) / 1000);
     }
 
 }

@@ -28,7 +28,7 @@ Actions:
     # Message sent when the player can jump again (set "" to disable)
     message: "Double jump is ready again!"
     # Sound played when the player can jump again (set "" to disable)
-    sound: "BLOCK_NOTE_PLING"
+    sound: "BLOCK_NOTE_BLOCK_PLING"
   Errors:
     AlreadyJumped:
       # Message sent when the player can't jump again (set "" to disable)
@@ -39,7 +39,7 @@ Actions:
       # Message sent when jump is on cooldown (set "" to disable)
       message: "Please wait &c%cooldown%s &bbefore using double jump again!"
       # Sound played when jump is on cooldown (set "" to disable)
-      sound: "BLOCK_NOTE_BASS"
+      sound: "BLOCK_NOTE_BLOCK_BASS"
     NotAvailable:
       # Message sent when the jump feature is not available (set "" to disable)
       message: "Double jump is currently unavailable."

@@ -2,6 +2,9 @@ package me.vesder.blazeydoublejump.jumps;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import me.vesder.blazeydoublejump.data.User;
+import me.vesder.blazeydoublejump.data.UserManager;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,10 +18,7 @@ import static me.vesder.blazeydoublejump.BlazeyDoubleJump.getPlugin;
 import static me.vesder.blazeydoublejump.jumps.JumpUtility.LAUNCH;
 import static me.vesder.blazeydoublejump.jumps.JumpUtility.LAUNCHY;
 import static me.vesder.blazeydoublejump.jumps.JumpUtility.getJumpCooldownLeft;
-import static me.vesder.blazeydoublejump.jumps.JumpUtility.isJumpAllowed;
 import static me.vesder.blazeydoublejump.jumps.JumpUtility.isJumpOnCooldown;
-import static me.vesder.blazeydoublejump.jumps.JumpUtility.setJumpAllowed;
-import static me.vesder.blazeydoublejump.jumps.JumpUtility.setLastJumpTime;
 import static org.bukkit.Bukkit.getPluginManager;
 
 public class DoubleJump implements Listener {
@@ -46,7 +46,8 @@ public class DoubleJump implements Listener {
 
         e.setCancelled(true);
 
-        if (!isJumpAllowed(player.getUniqueId())) {
+        User user = UserManager.getUser(player.getUniqueId());
+        if (!user.isJumpAllowed()) {
 
             VoidUtils.sendMessage(player, "Actions.Errors.AlreadyJumped.message", placeholders);
             VoidUtils.playStringSound(player, "Actions.Errors.AlreadyJumped.sound");
@@ -64,8 +65,9 @@ public class DoubleJump implements Listener {
         VoidUtils.playStringSound(player, "Actions.OnJump.sound");
 
         player.setVelocity(player.getLocation().getDirection().multiply(LAUNCH).setY(LAUNCHY));
-        setJumpAllowed(player.getUniqueId(), false);
-        setLastJumpTime(player.getUniqueId());
+
+        user.setJumpAllowed(false);
+        user.setLastJumpTime(System.currentTimeMillis());
     }
 
 }

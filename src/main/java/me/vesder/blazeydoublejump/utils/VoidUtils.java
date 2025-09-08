@@ -1,8 +1,10 @@
 package me.vesder.blazeydoublejump.utils;
 
-import me.vesder.blazeydoublejump.config.AdminMsgConfig;
+import me.vesder.blazeydoublejump.config.ConfigManager;
+import me.vesder.blazeydoublejump.config.customconfigs.MessagesConfig;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+
 import java.util.Map;
 
 import static me.vesder.blazeydoublejump.config.ConfigUtils.getStringConfig;
@@ -21,9 +23,11 @@ public class VoidUtils {
         player.sendMessage(color(prefix + message));
     }
 
+    private static final MessagesConfig messagesConfig = (MessagesConfig) ConfigManager.getConfigManager().getCustomConfig("messages.yml");
+
     public static void sendMessageAdmin(Player player, String configPath, String value, String value2) {
 
-        String message = AdminMsgConfig.getAdminMsgConfig().getStringConfig(configPath);
+        String message = messagesConfig.getSuccess();
 
 
         if (message.isEmpty()) return;
@@ -33,7 +37,7 @@ public class VoidUtils {
 
     public static void sendMessageAdmin(Player player, String configPath) {
 
-        String message = AdminMsgConfig.getAdminMsgConfig().getStringConfig(configPath);
+        String message = messagesConfig.getInvalid_number();
 
 
         if (message.isEmpty()) return;

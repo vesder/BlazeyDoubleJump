@@ -1,7 +1,8 @@
 package me.vesder.blazeydoublejump;
 
+import lombok.Getter;
 import me.vesder.blazeydoublejump.commands.CommandManager;
-import me.vesder.blazeydoublejump.config.AdminMsgConfig;
+import me.vesder.blazeydoublejump.config.ConfigManager;
 import me.vesder.blazeydoublejump.jumps.DoubleJump;
 import me.vesder.blazeydoublejump.jumps.InfiniteJump;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,11 +12,8 @@ import static org.bukkit.Bukkit.getPluginManager;
 
 public final class BlazeyDoubleJump extends JavaPlugin {
 
+    @Getter
     private static BlazeyDoubleJump plugin;
-
-    public static BlazeyDoubleJump getPlugin() {
-        return plugin;
-    }
 
     @Override
     public void onEnable() {
@@ -29,7 +27,7 @@ public final class BlazeyDoubleJump extends JavaPlugin {
 
         getCommand("blazeydoublejump").setExecutor(new CommandManager());
 
-        AdminMsgConfig.getAdminMsgConfig().load();
+        ConfigManager.getConfigManager().load();
 
         getLogger().info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ★");
         getLogger().info("      BlazeyDoubleJump  ");
