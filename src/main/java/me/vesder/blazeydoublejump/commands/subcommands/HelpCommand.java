@@ -66,7 +66,7 @@ public class HelpCommand implements SubCommand {
 
     @Override
     public String getSyntax() {
-        return "/bdj help <command>";
+        return "/bdj help [command]";
     }
 
     @Override

@@ -2,6 +2,7 @@ package me.vesder.blazeydoublejump.commands;
 
 import me.vesder.blazeydoublejump.commands.subcommands.ActionsCommand;
 import me.vesder.blazeydoublejump.commands.subcommands.HelpCommand;
+import me.vesder.blazeydoublejump.commands.subcommands.ReloadCommand;
 import me.vesder.blazeydoublejump.commands.subcommands.SettingsCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -24,6 +25,7 @@ public class CommandManager implements TabExecutor {
         registerSubCommands(
 
             new HelpCommand(),
+            new ReloadCommand(),
             new ActionsCommand(),
             new SettingsCommand()
 
