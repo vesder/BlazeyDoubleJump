@@ -8,17 +8,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static me.vesder.blazeydoublejump.BlazeyDoubleJump.getPlugin;
-
 public class ConfigUtils {
 
     private static final Map<String, String> keyMapCache = new HashMap<>(); // lowercase -> actual path
     private static final Map<String, Set<String>> configMapCache = new HashMap<>(); // path -> value
 
-    public static void setConfig(String configName, String path, Object value) {
+    public static void set(String configName, String path, Object value) {
 
         configManager.getCustomConfig(configName).config.set(findRealPath(configName, path), value);
-        getPlugin().saveConfig();
+
+        configManager.save(configName);
+        configManager.load(configName);
     }
 
     private static String findRealPath(String configName, String path) {

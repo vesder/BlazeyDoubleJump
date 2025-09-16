@@ -20,8 +20,6 @@ public final class BlazeyDoubleJump extends JavaPlugin {
 
         plugin = this;
 
-        saveDefaultConfig();
-
         getPluginManager().registerEvents(new JoinListener(), this);
         getPluginManager().registerEvents(new MoveListener(), this);
         getPluginManager().registerEvents(new ToggleFlightListener(), this);

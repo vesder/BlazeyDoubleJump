@@ -2,6 +2,7 @@ package me.vesder.blazeydoublejump.commands.subcommands;
 
 import me.vesder.blazeydoublejump.commands.SubCommand;
 import me.vesder.blazeydoublejump.config.ConfigManager;
+import me.vesder.blazeydoublejump.config.ConfigUtils;
 import me.vesder.blazeydoublejump.config.customconfigs.MessagesConfig;
 import me.vesder.blazeydoublejump.config.customconfigs.SettingsConfig;
 import me.vesder.blazeydoublejump.utils.TextUtils;
@@ -16,7 +17,6 @@ import java.util.logging.Level;
 
 import static me.vesder.blazeydoublejump.commands.CommandManager.getSubCommand;
 import static me.vesder.blazeydoublejump.config.ConfigUtils.configReader;
-import static me.vesder.blazeydoublejump.config.ConfigUtils.setConfig;
 import static org.bukkit.Bukkit.getLogger;
 
 public class SettingsCommand implements SubCommand {
@@ -45,16 +45,24 @@ public class SettingsCommand implements SubCommand {
     public void perform(Player player, String[] args) {
 
         if (args.length >= 3) {
+            String value;
+            String path;
             switch (args[1].toLowerCase()) {
+                case "prefix":
+                    path = args[0] + "." + args[1];
+                    value = String.join(" ", Arrays.copyOfRange(args, 2, args.length));
+                    ConfigUtils.set("settings.yml", path, value);
+                    VoidUtils.sendMessageAdmin(player, path, value);
+                    return;
                 case "infinitejump":
-                    setConfig("settings.yml", args[0] + "." + args[1], Boolean.valueOf(args[2]));
+                    ConfigUtils.set("settings.yml", args[0] + "." + args[1], Boolean.valueOf(args[2]));
                     VoidUtils.sendMessageAdmin(player, args[1], args[2]);
                     return;
                 case "launch":
                 case "launchy":
                 case "cooldown":
                     try {
-                        setConfig("settings.yml", args[0] + "." + args[1], Double.valueOf(args[2]));
+                        ConfigUtils.set("settings.yml", args[0] + "." + args[1], Double.valueOf(args[2]));
                         VoidUtils.sendMessageAdmin(player, args[1], args[2]);
                         return;
                     } catch (NumberFormatException ex) {
