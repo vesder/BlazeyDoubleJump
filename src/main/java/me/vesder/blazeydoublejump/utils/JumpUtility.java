@@ -1,18 +1,15 @@
-package me.vesder.blazeydoublejump.jumps;
+package me.vesder.blazeydoublejump.utils;
 
+import me.vesder.blazeydoublejump.config.ConfigManager;
+import me.vesder.blazeydoublejump.config.customconfigs.SettingsConfig;
 import me.vesder.blazeydoublejump.data.User;
 import me.vesder.blazeydoublejump.data.UserManager;
 
 import java.util.UUID;
 
-import static me.vesder.blazeydoublejump.config.ConfigUtils.getDoubleConfig;
-
 public class JumpUtility {
 
-    public static final double
-        LAUNCH = getDoubleConfig("Settings.Launch", 10D),
-        LAUNCHY = getDoubleConfig("Settings.LaunchY", 10D),
-        COOLDOWN = getDoubleConfig("Settings.Cooldown") * 1000L;
+    private static final SettingsConfig settingsConfig = (SettingsConfig) ConfigManager.getConfigManager().getCustomConfig("settings.yml");
 
     /**
      * Checks if the player is currently on cooldown and cannot jump yet.
@@ -26,7 +23,7 @@ public class JumpUtility {
 
         if (user.getLastJumpTime() == 0) return false;
 
-        return System.currentTimeMillis() - user.getLastJumpTime() < COOLDOWN;
+        return System.currentTimeMillis() - user.getLastJumpTime() < settingsConfig.getCooldown() * 1000L;
     }
 
     /**
@@ -41,7 +38,7 @@ public class JumpUtility {
 
         if (user.getLastJumpTime() == 0) return 0;
 
-        return (int) ((COOLDOWN - (System.currentTimeMillis() - user.getLastJumpTime())) / 1000);
+        return (int) ((settingsConfig.getCooldown() * 1000L - (System.currentTimeMillis() - user.getLastJumpTime())) / 1000);
     }
 
 }

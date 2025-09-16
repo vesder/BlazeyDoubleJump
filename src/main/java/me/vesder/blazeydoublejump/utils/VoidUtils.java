@@ -2,69 +2,67 @@ package me.vesder.blazeydoublejump.utils;
 
 import me.vesder.blazeydoublejump.config.ConfigManager;
 import me.vesder.blazeydoublejump.config.customconfigs.MessagesConfig;
+import me.vesder.blazeydoublejump.config.customconfigs.SettingsConfig;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Sound;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Map;
-
-import static me.vesder.blazeydoublejump.config.ConfigUtils.getStringConfig;
 import static me.vesder.blazeydoublejump.utils.TextUtils.color;
 
 public class VoidUtils {
 
-    private static final String prefix = getStringConfig("Actions.prefix");
-
-    public static void sendMessage(Player player, String configPath) {
-
-        String message = getStringConfig(configPath);
-
-        if (message.isEmpty()) return;
-
-        player.sendMessage(color(prefix + message));
-    }
-
+    private static final SettingsConfig settingsConfig = (SettingsConfig) ConfigManager.getConfigManager().getCustomConfig("settings.yml");
     private static final MessagesConfig messagesConfig = (MessagesConfig) ConfigManager.getConfigManager().getCustomConfig("messages.yml");
 
-    public static void sendMessageAdmin(Player player, String configPath, String value, String value2) {
+    public static void sendMessageAdmin(Player player, String value, String value2) {
 
-        String message = messagesConfig.getSuccess();
-
+        String message = messagesConfig.getConfigEditorSuccess();
 
         if (message.isEmpty()) return;
 
-        player.sendMessage(color(prefix + String.format(message, value, value2)));
+        player.sendMessage(color(settingsConfig.getPrefix() + String.format(message, value, value2)));
     }
 
-    public static void sendMessageAdmin(Player player, String configPath) {
+    public static void runActionDispatcher(String action, CommandSender target, Player player) {
 
-        String message = messagesConfig.getInvalid_number();
-
-
-        if (message.isEmpty()) return;
-
-        player.sendMessage(color(prefix + message));
-    }
-
-    public static void sendMessage(Player player, String configPath, Map<String, Object> placeholders) {
-
-        String message = getStringConfig(configPath);
-
-        if (message.isEmpty()) return;
-
-        for (Map.Entry<String, Object> entry : placeholders.entrySet()) {
-            message = message.replace(entry.getKey(), String.valueOf(entry.getValue()));
+        if (action.startsWith("CHAT:")) {
+            action = action.substring(5).trim();
+            target.sendMessage(color(settingsConfig.getPrefix() + action, player));
+            return;
         }
 
-        player.sendMessage(color(prefix + message));
-    }
+        // PLAYER ONLY
+        if (!(target instanceof Player)) {
+            return;
+        }
 
-    public static void playStringSound(Player player, String configPath) {
+        Player targetPlayer = (Player) target;
 
-        String sound = getStringConfig(configPath);
+        if (action.startsWith("ACTIONBAR:")) {
+            action = action.substring(10).trim();
+            targetPlayer.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(color(action, player)));
+            return;
+        }
 
-        if (sound.isEmpty()) return;
+        if (action.startsWith("TITLE:")) { // sub title support later
+            action = action.substring(6).trim();
+            targetPlayer.sendTitle(color(action, player), null);
+            return;
+        }
 
-        player.playSound(player.getLocation(), Sound.valueOf(sound), 5.0F, 1.0F);
+        if (action.startsWith("SOUND:")) {
+            action = action.substring(6).trim();
+            targetPlayer.playSound(targetPlayer.getLocation(), Sound.valueOf(action), 5.0F, 1.0F);
+            return;
+        }
+
+        if (action.startsWith("COMMAND:")) {
+            action = action.substring(8).trim();
+            targetPlayer.performCommand(action);
+            return;
+        }
     }
 
 }

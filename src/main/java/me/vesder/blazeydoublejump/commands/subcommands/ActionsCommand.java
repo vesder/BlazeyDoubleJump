@@ -2,7 +2,9 @@ package me.vesder.blazeydoublejump.commands.subcommands;
 
 import me.vesder.blazeydoublejump.commands.SubCommand;
 import me.vesder.blazeydoublejump.utils.VoidUtils;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +31,11 @@ public class ActionsCommand implements SubCommand {
     }
 
     @Override
+    public String getPermission() {
+        return "blazeydoublejump.command.actions";
+    }
+
+    @Override
     public void perform(Player player, String[] args) {
 
         if (args.length >= 3) {
@@ -38,8 +45,8 @@ public class ActionsCommand implements SubCommand {
                 case "prefix":
                     path = args[0] + "." + args[1];
                     value = String.join(" ", Arrays.copyOfRange(args, 2, args.length));
-                    setConfig(path, value);
-                    VoidUtils.sendMessageAdmin(player, "success", path, value);
+                    setConfig("settings.yml", path, value);
+                    VoidUtils.sendMessageAdmin(player, path, value);
                     return;
                 case "onjump":
                 case "onactive":
@@ -49,8 +56,8 @@ public class ActionsCommand implements SubCommand {
                         case "command":
                             path = args[0] + "." + args[1] + "." + args[2];
                             value = String.join(" ", Arrays.copyOfRange(args, 3, args.length));
-                            setConfig(path, value);
-                            VoidUtils.sendMessageAdmin(player, "success", path, value);
+                            setConfig("settings.yml", path, value);
+                            VoidUtils.sendMessageAdmin(player, path, value);
                             return;
                     }
                     break;
@@ -65,8 +72,8 @@ public class ActionsCommand implements SubCommand {
                                 case "command":
                                     path = args[0] + "." + args[1] + "." + args[2] + "." + args[3];
                                     value = String.join(" ", Arrays.copyOfRange(args, 4, args.length));
-                                    setConfig(path, value);
-                                    VoidUtils.sendMessageAdmin(player, "success", path, value);
+                                    setConfig("settings.yml", path, value);
+                                    VoidUtils.sendMessageAdmin(player, path, value);
                                     return;
                             }
                     }
@@ -78,8 +85,8 @@ public class ActionsCommand implements SubCommand {
     }
 
     @Override
-    public List<String> getSubcommandArguments(String[] args) {
+    public List<String> getSubcommandArguments(CommandSender sender, String[] args) {
 
-        return new ArrayList<>(configReader(String.join(".", Arrays.copyOfRange(args, 0, args.length - 1))));
+        return new ArrayList<>(configReader("settings.yml", String.join(".", Arrays.copyOfRange(args, 0, args.length - 1))));
     }
 }

@@ -1,8 +1,10 @@
 package me.vesder.blazeydoublejump.config;
 
 import org.bukkit.configuration.ConfigurationSection;
+
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,13 +15,13 @@ public class ConfigUtils {
     private static final Map<String, String> keyMapCache = new HashMap<>(); // lowercase -> actual path
     private static final Map<String, Set<String>> configMapCache = new HashMap<>(); // path -> value
 
-    public static void setConfig(String path, Object value) {
+    public static void setConfig(String configName, String path, Object value) {
 
-        getPlugin().getConfig().set(findRealPath(path), value);
+        configManager.getCustomConfig(configName).config.set(findRealPath(configName, path), value);
         getPlugin().saveConfig();
     }
 
-    private static String findRealPath(String path) {
+    private static String findRealPath(String configName, String path) {
 
         String lowerPath = path.toLowerCase();
 
@@ -27,7 +29,7 @@ public class ConfigUtils {
             return keyMapCache.get(lowerPath);
         }
 
-        for (String key : getPlugin().getConfig().getKeys(true)) {
+        for (String key : configManager.getCustomConfig(configName).config.getKeys(true)) {
             if (key.equalsIgnoreCase(path)) {
                 keyMapCache.put(lowerPath, key);
                 return key;
@@ -37,7 +39,7 @@ public class ConfigUtils {
         throw new RuntimeException("Config path not found (ignoreCase): " + path);
     }
 
-    public static Set<String> configReader(String path) {
+    public static Set<String> configReader(String configName, String path) {
 
         String lowerPath = path.toLowerCase();
 
@@ -47,7 +49,7 @@ public class ConfigUtils {
 
         try {
 
-            Object value = getPlugin().getConfig().get(findRealPath(path));
+            Object value = configManager.getCustomConfig(configName).config.get(findRealPath(configName, path));
 
             Set<String> result = value instanceof ConfigurationSection
                 ? ((ConfigurationSection) value).getKeys(false)
@@ -63,26 +65,6 @@ public class ConfigUtils {
 
     }
 
-    public static String getStringConfig(String path) {
-
-        return getPlugin().getConfig().getString(path);
-    }
-
-    public static double getDoubleConfig(String path) {
-
-        return getPlugin().getConfig().getDouble(path);
-    }
-
-    public static double getDoubleConfig(String path, Double max) {
-
-        return Math.min(getPlugin().getConfig().getDouble(path), max);
-    }
-
-    public static boolean getBooleanConfig(String path) {
-
-        return getPlugin().getConfig().getBoolean(path);
-    }
-
     // New Configuration System
 
     private static final ConfigManager configManager = ConfigManager.getConfigManager();
@@ -90,6 +72,22 @@ public class ConfigUtils {
     public static String getStringConfig(String configName, String path) {
 
         return configManager.getCustomConfig(configName).config.getString(path);
+    }
+
+    public static List<String> getStringListConfig(String configName, String path) {
+
+        return configManager.getCustomConfig(configName).config.getStringList(path);
+
+    }
+
+    public static boolean getBooleanConfig(String configName, String path) {
+
+        return configManager.getCustomConfig(configName).config.getBoolean(path);
+    }
+
+    public static double getDoubleConfig(String configName, String path) {
+
+        return configManager.getCustomConfig(configName).config.getDouble(path);
     }
 
 }

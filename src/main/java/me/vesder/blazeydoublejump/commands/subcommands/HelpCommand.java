@@ -2,11 +2,10 @@ package me.vesder.blazeydoublejump.commands.subcommands;
 
 import me.vesder.blazeydoublejump.commands.CommandManager;
 import me.vesder.blazeydoublejump.commands.SubCommand;
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
+
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static me.vesder.blazeydoublejump.commands.CommandManager.getSubCommand;
 import static me.vesder.blazeydoublejump.commands.CommandManager.getSubCommandNames;
@@ -15,23 +14,20 @@ import static me.vesder.blazeydoublejump.utils.TextUtils.color;
 
 public class HelpCommand implements SubCommand {
 
-    private final Map<String, String> cachedHelpMessages = new HashMap<>(); // name -> message
-
     private static final String HEADER = "&b=====&6===== &d&lBlazeyDoubleJump &6=====&b=====&f\n \n";
     private static final String FOOTER = "&b=====&6=============================&b=====";
 
-    private String getDefaultHelpMessage() {
-
-        String commandName = "help";
-
-        if (cachedHelpMessages.containsKey(commandName)) {
-            return cachedHelpMessages.get(commandName);
-        }
+    private String getDefaultHelpMessage(CommandSender sender) {
 
         StringBuilder helpMessageBuilder = new StringBuilder();
         helpMessageBuilder.append(HEADER);
 
         for (SubCommand subCommand : getSubCommands()) {
+
+            if (!sender.hasPermission(subCommand.getPermission())) {
+                continue;
+            }
+
             helpMessageBuilder.append(subCommand.getSyntax())
                 .append("\n")
                 .append(subCommand.getDescription())
@@ -39,29 +35,23 @@ public class HelpCommand implements SubCommand {
         }
 
         helpMessageBuilder.append(FOOTER);
-        cachedHelpMessages.put(commandName, color(helpMessageBuilder.toString()));
 
-        return cachedHelpMessages.get(commandName);
+        return color(helpMessageBuilder.toString());
     }
 
-    private String getHelpMessage(String commandName) {
-
-        if (cachedHelpMessages.containsKey(commandName)) {
-            return cachedHelpMessages.get(commandName);
-        }
+    private String getHelpMessage(CommandSender sender, String commandName) {
 
         StringBuilder helpMessageBuilder = new StringBuilder();
         helpMessageBuilder.append(HEADER);
 
-        for (String subArg : getSubCommand(commandName).getSubcommandArguments(new String[]{commandName, ""})) {
+        for (String subArg : getSubCommand(commandName).getSubcommandArguments(sender, new String[]{commandName, ""})) {
             helpMessageBuilder.append("/bdj ").append(commandName).append(" ").append(subArg)
                 .append("\n \n");
         }
 
         helpMessageBuilder.append(FOOTER);
-        cachedHelpMessages.put(commandName, color(helpMessageBuilder.toString()));
 
-        return cachedHelpMessages.get(commandName);
+        return color(helpMessageBuilder.toString());
     }
 
     @Override
@@ -80,18 +70,28 @@ public class HelpCommand implements SubCommand {
     }
 
     @Override
-    public void perform(Player player, String[] args) {
-
-        if (args.length >= 2 && getSubCommandNames().contains(args[1].toLowerCase())) {
-            player.sendMessage(getHelpMessage(args[1].toLowerCase()));
-            return;
-        }
-
-        player.sendMessage(getDefaultHelpMessage());
+    public String getPermission() {
+        return "blazeydoublejump.command.help";
     }
 
     @Override
-    public List<String> getSubcommandArguments(String[] args) {
+    public boolean allowConsole() {
+        return true;
+    }
+
+    @Override
+    public void perform(CommandSender sender, String[] args) {
+
+        if (args.length >= 2 && getSubCommandNames().contains(args[1].toLowerCase())) {
+            sender.sendMessage(getHelpMessage(sender, args[1].toLowerCase()));
+            return;
+        }
+
+        sender.sendMessage(getDefaultHelpMessage(sender));
+    }
+
+    @Override
+    public List<String> getSubcommandArguments(CommandSender sender, String[] args) {
 
         if (args.length == 2) {
             return CommandManager.getSubCommandNames(getName());

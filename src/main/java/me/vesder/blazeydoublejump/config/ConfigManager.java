@@ -2,6 +2,7 @@ package me.vesder.blazeydoublejump.config;
 
 import me.vesder.blazeydoublejump.BlazeyDoubleJump;
 import me.vesder.blazeydoublejump.config.customconfigs.MessagesConfig;
+import me.vesder.blazeydoublejump.config.customconfigs.SettingsConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -23,7 +24,7 @@ public class ConfigManager {
     static {
 
         registerCustomConfigs(
-
+            new SettingsConfig(),
             new MessagesConfig()
 
         );

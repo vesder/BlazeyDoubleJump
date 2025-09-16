@@ -7,9 +7,9 @@ import me.vesder.blazeydoublejump.config.CustomConfig;
 public class MessagesConfig extends CustomConfig {
 
     @Getter
-    private String success;
+    private String configEditorSuccess;
     @Getter
-    private String invalid_number;
+    private String configEditorInvalidNumber;
 
     @Override
     public String getName() {
@@ -18,7 +18,7 @@ public class MessagesConfig extends CustomConfig {
 
     @Override
     public void loadValues() {
-        success = ConfigUtils.getStringConfig(getName(), "success");
-        invalid_number = ConfigUtils.getStringConfig(getName(), "invalid-number");
+        configEditorSuccess = ConfigUtils.getStringConfig(getName(), "configEditor.success");
+        configEditorInvalidNumber = ConfigUtils.getStringConfig(getName(), "configEditor.invalid-number");
     }
 }

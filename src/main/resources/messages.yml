@@ -1,2 +1,3 @@
-success: "&aSetting &0'&r %s &0'&a successfully updated to &0'&r %s &0'"
-invalid-number: "&cInvalid number. Please enter a valid numeric value."
+configEditor:
+  success: "&aSetting &8'&r %s &8'&a successfully updated to &8'&r %s &8'"
+  invalid-number: "&cInvalid number. Please enter a valid numeric value."

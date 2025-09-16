@@ -3,11 +3,11 @@ package me.vesder.blazeydoublejump;
 import lombok.Getter;
 import me.vesder.blazeydoublejump.commands.CommandManager;
 import me.vesder.blazeydoublejump.config.ConfigManager;
-import me.vesder.blazeydoublejump.jumps.DoubleJump;
-import me.vesder.blazeydoublejump.jumps.InfiniteJump;
+import me.vesder.blazeydoublejump.listeners.JoinListener;
+import me.vesder.blazeydoublejump.listeners.MoveListener;
+import me.vesder.blazeydoublejump.listeners.ToggleFlightListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import static me.vesder.blazeydoublejump.config.ConfigUtils.getBooleanConfig;
 import static org.bukkit.Bukkit.getPluginManager;
 
 public final class BlazeyDoubleJump extends JavaPlugin {
@@ -22,8 +22,9 @@ public final class BlazeyDoubleJump extends JavaPlugin {
 
         saveDefaultConfig();
 
-        getPluginManager().registerEvents(
-            getBooleanConfig("Settings.InfiniteJump") ? new InfiniteJump() : new DoubleJump(), this);
+        getPluginManager().registerEvents(new JoinListener(), this);
+        getPluginManager().registerEvents(new MoveListener(), this);
+        getPluginManager().registerEvents(new ToggleFlightListener(), this);
 
         getCommand("blazeydoublejump").setExecutor(new CommandManager());
 

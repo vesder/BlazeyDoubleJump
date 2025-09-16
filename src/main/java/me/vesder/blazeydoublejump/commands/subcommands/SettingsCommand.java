@@ -1,8 +1,14 @@
 package me.vesder.blazeydoublejump.commands.subcommands;
 
 import me.vesder.blazeydoublejump.commands.SubCommand;
+import me.vesder.blazeydoublejump.config.ConfigManager;
+import me.vesder.blazeydoublejump.config.customconfigs.MessagesConfig;
+import me.vesder.blazeydoublejump.config.customconfigs.SettingsConfig;
+import me.vesder.blazeydoublejump.utils.TextUtils;
 import me.vesder.blazeydoublejump.utils.VoidUtils;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,23 +37,30 @@ public class SettingsCommand implements SubCommand {
     }
 
     @Override
+    public String getPermission() {
+        return "blazeydoublejump.command.settings";
+    }
+
+    @Override
     public void perform(Player player, String[] args) {
 
         if (args.length >= 3) {
             switch (args[1].toLowerCase()) {
                 case "infinitejump":
-                    setConfig(args[0] + "." + args[1], Boolean.valueOf(args[2]));
-                    VoidUtils.sendMessageAdmin(player, "success", args[1], args[2]);
+                    setConfig("settings.yml", args[0] + "." + args[1], Boolean.valueOf(args[2]));
+                    VoidUtils.sendMessageAdmin(player, args[1], args[2]);
                     return;
                 case "launch":
                 case "launchy":
                 case "cooldown":
                     try {
-                        setConfig(args[0] + "." + args[1], Double.valueOf(args[2]));
-                        VoidUtils.sendMessageAdmin(player, "success", args[1], args[2]);
+                        setConfig("settings.yml", args[0] + "." + args[1], Double.valueOf(args[2]));
+                        VoidUtils.sendMessageAdmin(player, args[1], args[2]);
                         return;
                     } catch (NumberFormatException ex) {
-                        VoidUtils.sendMessageAdmin(player, "invalid-number");
+                        if (!messagesConfig.getConfigEditorInvalidNumber().isEmpty()) {
+                            player.sendMessage(TextUtils.color(settingsConfig.getPrefix() + messagesConfig.getConfigEditorInvalidNumber()));
+                        }
                         getLogger().log(Level.WARNING, "Unexpected exception while updating config", ex);
                         break;
                     }
@@ -58,8 +71,12 @@ public class SettingsCommand implements SubCommand {
     }
 
     @Override
-    public List<String> getSubcommandArguments(String[] args) {
+    public List<String> getSubcommandArguments(CommandSender sender, String[] args) {
 
-        return new ArrayList<>(configReader(String.join(".", Arrays.copyOfRange(args, 0, args.length - 1))));
+        return new ArrayList<>(configReader("settings.yml", String.join(".", Arrays.copyOfRange(args, 0, args.length - 1))));
     }
+
+    SettingsConfig settingsConfig = (SettingsConfig) ConfigManager.getConfigManager().getCustomConfig("settings.yml");
+    MessagesConfig messagesConfig = (MessagesConfig) ConfigManager.getConfigManager().getCustomConfig("messages.yml");
+
 }

@@ -1,0 +1,50 @@
+################################################################################
+# BlazeyDoubleJump - Main Configuration
+#
+# Everything is optional. Remove or comment out sections you don't need.
+# Actions are executed in order; leave a list empty ([]) to disable it.
+################################################################################
+
+# ------------------------------------------------------------------------------
+# Action prefixes (case-sensitive):
+#   CHAT:<message>        → Sends a chat message
+#   ACTIONBAR:<message>   → Shows an actionbar
+#   TITLE:<message>       → Shows a title
+#   SOUND:<sound_name>    → Plays a sound (see list below)
+#     Sound list: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html
+#   COMMAND:<command>     → Runs a command as the player
+# ------------------------------------------------------------------------------
+
+Settings:
+  # Prefix sent at the beginning of all messages (set "" to disable)
+  Prefix: "&d&lDoubleJump &6» &b"
+  # Allow players to jump infinitely? (true/false)
+  InfiniteJump: false
+  # Horizontal launch power (max 10)
+  Launch: 1.0
+  # Vertical launch power (Y-axis)
+  LaunchY: 0.5
+  # Cooldown between double jumps (in seconds)
+  Cooldown: 1.5
+
+jump:
+  actions:
+    - "CHAT:Woosh! You launched into the air!"
+    - "SOUND:ENTITY_BAT_TAKEOFF"
+active:
+  actions:
+    - "CHAT:Double jump is ready again!"
+    - "SOUND:BLOCK_NOTE_BLOCK_PLING"
+errors:
+  used:
+    actions:
+      - "CHAT:You’ve already used your double jump!"
+      - "SOUND:ENTITY_VILLAGER_NO"
+  cooldown:
+    actions:
+      - "CHAT:Please wait &c%cooldown%s &bbefore using double jump again!"
+      - "SOUND:BLOCK_NOTE_BLOCK_BASS"
+  disabled:
+    actions:
+      - "CHAT:Double jump is currently unavailable."
+      - "SOUND:BLOCK_ANVIL_LAND"
