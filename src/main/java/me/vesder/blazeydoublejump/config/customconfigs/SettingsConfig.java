@@ -12,8 +12,6 @@ public class SettingsConfig extends CustomConfig {
     @Getter
     String prefix;
     @Getter
-    boolean infiniteJump;
-    @Getter
     double launch;
     @Getter
     double launchY;
@@ -43,7 +41,6 @@ public class SettingsConfig extends CustomConfig {
     public void loadValues() {
         // Settings
         prefix = ConfigUtils.getStringConfig(getName(), "Settings.Prefix");
-        infiniteJump = ConfigUtils.getBooleanConfig(getName(), "Settings.InfiniteJump");
         launch = ConfigUtils.getDoubleConfig(getName(), "Settings.Launch");
         launchY = ConfigUtils.getDoubleConfig(getName(), "Settings.LaunchY");
         cooldown = ConfigUtils.getDoubleConfig(getName(), "Settings.Cooldown");

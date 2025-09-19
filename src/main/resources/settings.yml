@@ -18,8 +18,6 @@
 Settings:
   # Prefix sent at the beginning of all messages (set "" to disable)
   Prefix: "&d&lDoubleJump &6» &b"
-  # Allow players to jump infinitely? (true/false)
-  InfiniteJump: false
   # Horizontal launch power (max 10)
   Launch: 1.0
   # Vertical launch power (Y-axis)

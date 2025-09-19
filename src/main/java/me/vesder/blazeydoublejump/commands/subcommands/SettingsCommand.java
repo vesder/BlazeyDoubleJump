@@ -5,8 +5,7 @@ import me.vesder.blazeydoublejump.config.ConfigManager;
 import me.vesder.blazeydoublejump.config.ConfigUtils;
 import me.vesder.blazeydoublejump.config.customconfigs.MessagesConfig;
 import me.vesder.blazeydoublejump.config.customconfigs.SettingsConfig;
-import me.vesder.blazeydoublejump.utils.TextUtils;
-import me.vesder.blazeydoublejump.utils.VoidUtils;
+import me.vesder.blazeydoublejump.utils.Utils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -52,22 +51,22 @@ public class SettingsCommand implements SubCommand {
                     path = args[0] + "." + args[1];
                     value = String.join(" ", Arrays.copyOfRange(args, 2, args.length));
                     ConfigUtils.set("settings.yml", path, value);
-                    VoidUtils.sendMessageAdmin(player, path, value);
+                    Utils.sendMessageAdmin(player, path, value);
                     return;
                 case "infinitejump":
                     ConfigUtils.set("settings.yml", args[0] + "." + args[1], Boolean.valueOf(args[2]));
-                    VoidUtils.sendMessageAdmin(player, args[1], args[2]);
+                    Utils.sendMessageAdmin(player, args[1], args[2]);
                     return;
                 case "launch":
                 case "launchy":
                 case "cooldown":
                     try {
                         ConfigUtils.set("settings.yml", args[0] + "." + args[1], Double.valueOf(args[2]));
-                        VoidUtils.sendMessageAdmin(player, args[1], args[2]);
+                        Utils.sendMessageAdmin(player, args[1], args[2]);
                         return;
                     } catch (NumberFormatException ex) {
                         if (!messagesConfig.getConfigEditorInvalidNumber().isEmpty()) {
-                            player.sendMessage(TextUtils.color(settingsConfig.getPrefix() + messagesConfig.getConfigEditorInvalidNumber()));
+                            player.sendMessage(Utils.color(settingsConfig.getPrefix() + messagesConfig.getConfigEditorInvalidNumber()));
                         }
                         getLogger().log(Level.WARNING, "Unexpected exception while updating config", ex);
                         break;

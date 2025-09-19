@@ -3,6 +3,7 @@ package me.vesder.blazeydoublejump;
 import lombok.Getter;
 import me.vesder.blazeydoublejump.commands.CommandManager;
 import me.vesder.blazeydoublejump.config.ConfigManager;
+import me.vesder.blazeydoublejump.hooks.MetricsLite;
 import me.vesder.blazeydoublejump.listeners.JoinListener;
 import me.vesder.blazeydoublejump.listeners.MoveListener;
 import me.vesder.blazeydoublejump.listeners.ToggleFlightListener;
@@ -27,6 +28,9 @@ public final class BlazeyDoubleJump extends JavaPlugin {
         getCommand("blazeydoublejump").setExecutor(new CommandManager());
 
         ConfigManager.getConfigManager().load();
+
+        int pluginId = 24830;
+        MetricsLite metricsLite = new MetricsLite(this, pluginId);
 
         getLogger().info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ★");
         getLogger().info("      BlazeyDoubleJump  ");

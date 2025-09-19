@@ -3,18 +3,19 @@ package me.vesder.blazeydoublejump.utils;
 import me.vesder.blazeydoublejump.config.ConfigManager;
 import me.vesder.blazeydoublejump.config.customconfigs.MessagesConfig;
 import me.vesder.blazeydoublejump.config.customconfigs.SettingsConfig;
+import me.vesder.blazeydoublejump.hooks.VaultHook;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import static me.vesder.blazeydoublejump.utils.TextUtils.color;
+import static me.vesder.blazeydoublejump.utils.JumpUtility.getJumpCooldownLeft;
 
-public class VoidUtils {
+public class Utils {
 
-    private static final SettingsConfig settingsConfig = (SettingsConfig) ConfigManager.getConfigManager().getCustomConfig("settings.yml");
-    private static final MessagesConfig messagesConfig = (MessagesConfig) ConfigManager.getConfigManager().getCustomConfig("messages.yml");
+    // Void
 
     public static void sendMessageAdmin(Player player, String value, String value2) {
 
@@ -64,5 +65,28 @@ public class VoidUtils {
             return;
         }
     }
+
+    // Other
+
+    public static Boolean checkPermission(Player player, String permission) {
+
+        return player.hasPermission(permission) || VaultHook.hasPermissions() && VaultHook.getPerms().playerHas(player, permission);
+    }
+
+    public static String color(String string) {
+
+        return ChatColor.translateAlternateColorCodes('&', string);
+    }
+
+    public static String color(String string, Player player) {
+
+        string = string.replace("%cooldown%", String.valueOf(getJumpCooldownLeft(player.getUniqueId())));
+        string = string.replace("%player_name%", player.getDisplayName());
+
+        return ChatColor.translateAlternateColorCodes('&', string);
+    }
+
+    private static final SettingsConfig settingsConfig = (SettingsConfig) ConfigManager.getConfigManager().getCustomConfig("settings.yml");
+    private static final MessagesConfig messagesConfig = (MessagesConfig) ConfigManager.getConfigManager().getCustomConfig("messages.yml");
 
 }

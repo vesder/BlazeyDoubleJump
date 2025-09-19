@@ -10,7 +10,7 @@ import java.util.List;
 import static me.vesder.blazeydoublejump.commands.CommandManager.getSubCommand;
 import static me.vesder.blazeydoublejump.commands.CommandManager.getSubCommandNames;
 import static me.vesder.blazeydoublejump.commands.CommandManager.getSubCommands;
-import static me.vesder.blazeydoublejump.utils.TextUtils.color;
+import static me.vesder.blazeydoublejump.utils.Utils.color;
 
 public class HelpCommand implements SubCommand {
 

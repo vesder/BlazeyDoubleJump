@@ -4,6 +4,8 @@ main: me.vesder.blazeydoublejump.BlazeyDoubleJump
 api-version: "1.13"
 authors: [ vesder ]
 description: A simple double jump plugin for bukkit servers
+softdepend:
+  - Vault
 commands:
   blazeydoublejump:
     description: Plugin main command
@@ -23,6 +25,12 @@ permissions:
       blazeydoublejump.command.reload: true
       blazeydoublejump.command.settings: true
       blazeydoublejump.command.actions: true
+  blazeydoublejump.doublejump:
+    description: Allows the player to use the double jump ability.
+    default: true
+  blazeydoublejump.infinitejump:
+    description: Allows the player to perform unlimited double jumps.
+    default: op
   blazeydoublejump.command.settings:
     description: Allows use of /bdj settings to change plugin options.
     default: op
