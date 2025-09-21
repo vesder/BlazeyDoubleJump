@@ -3,6 +3,7 @@ package me.vesder.blazeydoublejump.hooks;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -28,7 +29,7 @@ import java.util.zip.GZIPOutputStream;
 /**
  * bStats collects some data for plugin authors.
  * <p>
- * Check out <a href="https://bStats.org/">...</a> to learn more about bStats!
+ * Check out <a href="https://bStats.org/">bStats.org</a> to learn more about bStats!
  */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class MetricsLite {
@@ -60,7 +61,12 @@ public class MetricsLite {
     // The url to which the data is sent
     private static final String URL = "https://bStats.org/submitData/bukkit";
 
+    /**
+     * -- GETTER --
+     *  Checks if bStats is enabled.
+     */
     // Is bStats enabled on this server?
+    @Getter
     private final boolean enabled;
 
     // Should failed requests be logged?
@@ -149,15 +155,6 @@ public class MetricsLite {
                 startSubmitting();
             }
         }
-    }
-
-    /**
-     * Checks if bStats is enabled.
-     *
-     * @return Whether bStats is enabled or not.
-     */
-    public boolean isEnabled() {
-        return enabled;
     }
 
     /**

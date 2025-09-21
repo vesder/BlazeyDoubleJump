@@ -1,9 +1,11 @@
 package me.vesder.blazeydoublejump.listeners;
 
+import me.vesder.blazeydoublejump.BlazeyDoubleJump;
 import me.vesder.blazeydoublejump.config.ConfigManager;
 import me.vesder.blazeydoublejump.config.customconfigs.SettingsConfig;
 import me.vesder.blazeydoublejump.data.User;
 import me.vesder.blazeydoublejump.data.UserManager;
+import me.vesder.blazeydoublejump.hooks.WorldGuardHook;
 import me.vesder.blazeydoublejump.utils.Utils;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -30,9 +32,13 @@ public class ToggleFlightListener implements Listener {
 
         e.setCancelled(true);
 
-        boolean canInfiniteJump = checkPermission(player, "blazeydoublejump.infinitejump");
+        boolean canDoubleJump = checkPermission(player, "blazeydoublejump.doublejump")
+            || (BlazeyDoubleJump.isWorldGuardInstalled && WorldGuardHook.isDoubleJumpAllowed(player));
 
-        if (!(checkPermission(player, "blazeydoublejump.doublejump") || canInfiniteJump)) {
+        boolean canInfiniteJump = checkPermission(player, "blazeydoublejump.infinitejump")
+            || (BlazeyDoubleJump.isWorldGuardInstalled && WorldGuardHook.isInfiniteJumpAllowed(player));
+
+        if (!(canDoubleJump || canInfiniteJump)) {
             for (String action : settingsConfig.getDisabledErrorActions()) {
                 Utils.runActionDispatcher(action, player, player);
             }

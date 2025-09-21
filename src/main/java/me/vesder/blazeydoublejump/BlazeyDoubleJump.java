@@ -4,9 +4,11 @@ import lombok.Getter;
 import me.vesder.blazeydoublejump.commands.CommandManager;
 import me.vesder.blazeydoublejump.config.ConfigManager;
 import me.vesder.blazeydoublejump.hooks.MetricsLite;
+import me.vesder.blazeydoublejump.hooks.WorldGuardHook;
 import me.vesder.blazeydoublejump.listeners.JoinListener;
 import me.vesder.blazeydoublejump.listeners.MoveListener;
 import me.vesder.blazeydoublejump.listeners.ToggleFlightListener;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import static org.bukkit.Bukkit.getPluginManager;
@@ -16,10 +18,24 @@ public final class BlazeyDoubleJump extends JavaPlugin {
     @Getter
     private static BlazeyDoubleJump plugin;
 
+    public static final boolean isWorldGuardInstalled =
+        Bukkit.getPluginManager().getPlugin("WorldGuard") != null;
+
     @Override
-    public void onEnable() {
+    public void onLoad() {
 
         plugin = this;
+
+        if (isWorldGuardInstalled) {
+            WorldGuardHook.init();
+        } else {
+            getLogger().info("WorldGuard not found! Some features may not work.");
+        }
+
+    }
+
+    @Override
+    public void onEnable() {
 
         getPluginManager().registerEvents(new JoinListener(), this);
         getPluginManager().registerEvents(new MoveListener(), this);

@@ -10,8 +10,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import static me.vesder.blazeydoublejump.utils.Utils.checkPermission;
-
 public class MoveListener implements Listener {
 
     SettingsConfig settingsConfig = (SettingsConfig) ConfigManager.getConfigManager().getCustomConfig("settings.yml");
@@ -22,15 +20,12 @@ public class MoveListener implements Listener {
         Player player = e.getPlayer();
         User user = UserManager.getUser(player.getUniqueId());
 
-        if (!checkPermission(player, "blazeydoublejump.infinitejump")) {
+        if (!player.getAllowFlight()) player.setAllowFlight(true);
+        if (user.isJumpAllowed() || !player.isOnGround()) return;
 
-            if (!player.getAllowFlight()) player.setAllowFlight(true);
-            if (user.isJumpAllowed() || !player.isOnGround()) return;
-
-            user.setJumpAllowed(true);
-            for (String action : settingsConfig.getActiveActions()) {
-                Utils.runActionDispatcher(action, player, player);
-            }
+        user.setJumpAllowed(true);
+        for (String action : settingsConfig.getActiveActions()) {
+            Utils.runActionDispatcher(action, player, player);
         }
 
     }

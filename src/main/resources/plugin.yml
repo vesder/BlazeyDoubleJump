@@ -6,6 +6,8 @@ authors: [ vesder ]
 description: A simple double jump plugin for bukkit servers
 softdepend:
   - Vault
+  - WorldEdit
+  - WorldGuard
 commands:
   blazeydoublejump:
     description: Plugin main command
