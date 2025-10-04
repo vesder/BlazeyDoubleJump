@@ -33,10 +33,10 @@ public class ToggleFlightListener implements Listener {
         e.setCancelled(true);
 
         boolean canDoubleJump = checkPermission(player, "blazeydoublejump.doublejump")
-            || (BlazeyDoubleJump.isWorldGuardInstalled && WorldGuardHook.isDoubleJumpAllowed(player));
+            || (BlazeyDoubleJump.isWorldGuardEnabled && WorldGuardHook.isDoubleJumpAllowed(player));
 
         boolean canInfiniteJump = checkPermission(player, "blazeydoublejump.infinitejump")
-            || (BlazeyDoubleJump.isWorldGuardInstalled && WorldGuardHook.isInfiniteJumpAllowed(player));
+            || (BlazeyDoubleJump.isWorldGuardEnabled && WorldGuardHook.isInfiniteJumpAllowed(player));
 
         if (!(canDoubleJump || canInfiniteJump)) {
             for (String action : settingsConfig.getDisabledErrorActions()) {

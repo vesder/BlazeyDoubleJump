@@ -6,6 +6,17 @@
 ################################################################################
 
 # ------------------------------------------------------------------------------
+# Available placeholders (provided by the plugin itself):
+# <username>         - The sender's username.
+# <displayname>      - The sender's display name (Component).
+# <player-prefix>    - The sender's prefix (from Vault/permissions plugin).
+# <player-suffix>    - The sender's suffix (from Vault/permissions plugin).
+# <group>            - The sender's primary group (from permissions plugin).
+# <worldname>        - The sender's current world name.
+#
+# Supports PlaceholderAPI placeholders as well!
+# Full list: https://wiki.placeholderapi.com/users/placeholder-list/
+#
 # Action prefixes (case-sensitive):
 #   CHAT:<message>        → Sends a chat message
 #   ACTIONBAR:<message>   → Shows an actionbar
@@ -40,7 +51,7 @@ errors:
       - "SOUND:ENTITY_VILLAGER_NO"
   cooldown:
     actions:
-      - "CHAT:Please wait &c%cooldown%s &bbefore using double jump again!"
+      - "CHAT:Please wait &c<cooldown>s &bbefore using double jump again!"
       - "SOUND:BLOCK_NOTE_BLOCK_BASS"
   disabled:
     actions:

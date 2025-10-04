@@ -8,6 +8,7 @@ softdepend:
   - Vault
   - WorldEdit
   - WorldGuard
+  - PlaceholderAPI
 commands:
   blazeydoublejump:
     description: Plugin main command
