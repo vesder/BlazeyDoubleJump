@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'me.vesder'
-version = '1.4'
+version = '1.4.1'
 
 repositories {
     mavenCentral()
@@ -17,12 +17,16 @@ repositories {
     }
     maven { url 'https://jitpack.io' }
     maven { url "https://maven.enginehub.org/repo/" }
+    maven {
+        url = 'https://repo.extendedclip.com/releases/'
+    }
 }
 
 dependencies {
     compileOnly ("org.spigotmc:spigot-api:1.12-R0.1-SNAPSHOT")
     compileOnly ("com.github.MilkBowl:VaultAPI:1.7")
     compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.0'
+    compileOnly ("me.clip:placeholderapi:2.11.6")
     compileOnly('org.projectlombok:lombok:1.18.34')
     annotationProcessor ('org.projectlombok:lombok:1.18.34')
 }
